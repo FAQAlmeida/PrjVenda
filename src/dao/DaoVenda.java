@@ -21,18 +21,17 @@ public class DaoVenda extends Venda {
 
     @Override
     public void Incluir() throws SQLException, ClassNotFoundException {
-        String sql = "set dateforma dmy Inset into pc_venda "
-                + "(numvenda, cod_cli, datavenda, dataEntrega, obs) "
+        String sql = "set dateformat dmy Insert into pc_venda "
+                + "(cod_cli, datavenda, dataEntrega, obs) "
                 + "values "
-                + "(?,?,?,?,?) ";
+                + "(?,?,?,?) ";
         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
         this.conexao = BancoSql.getConnection();
         comandoSql = conexao.prepareStatement(sql);
-        comandoSql.setInt(1, this.getNumVenda());
-        comandoSql.setInt(2, this.getCodCli());
-        comandoSql.setString(3, sdf.format(this.getDataVenda()));
-        comandoSql.setString(4, sdf.format(this.getDataEntrega()));
-        comandoSql.setString(5, this.getObs());
+        comandoSql.setInt(1, this.getCodCli());
+        comandoSql.setString(2, sdf.format(this.getDataVenda()));
+        comandoSql.setString(3, sdf.format(this.getDataEntrega()));
+        comandoSql.setString(4, this.getObs());
 
         comandoSql.execute();
         comandoSql.close();
@@ -42,7 +41,7 @@ public class DaoVenda extends Venda {
 
     @Override
     public void Alterar() throws SQLException, ClassNotFoundException {
-        String sql = "set dateforma dmy update pc_venda "
+        String sql = "set dateformat dmy update pc_venda "
                 + "cod_cli = ?, "
                 + "datavenda = ?, "
                 + "dataEntrega = ?, "

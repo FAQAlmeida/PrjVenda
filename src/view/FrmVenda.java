@@ -574,7 +574,7 @@ public class FrmVenda extends javax.swing.JFrame {
                         + e.getMessage(), "Erro:", JOptionPane.ERROR_MESSAGE);
                 e.printStackTrace();
             } catch (Exception e) {
-                JOptionPane.showMessageDialog(null, "Ocorreu um erro: "
+                JOptionPane.showMessageDialog(null, "Ocorreu um erroz: "
                         + e.getMessage(), "Erro:", JOptionPane.ERROR_MESSAGE);
                 e.printStackTrace();
             }
@@ -605,7 +605,7 @@ public class FrmVenda extends javax.swing.JFrame {
             incluir = true;
 
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "Ocorreu um erro: " + e.getMessage(),
+            JOptionPane.showMessageDialog(null, "Ocorreu um errox: " + e.getMessage(),
                     "Erro:", JOptionPane.ERROR_MESSAGE);
             e.printStackTrace();
         }
@@ -640,7 +640,7 @@ public class FrmVenda extends javax.swing.JFrame {
             }
             btnCancelarActionPerformed(null);
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(this, "Ocorreu um erro: \n" + e.getMessage(),
+            JOptionPane.showMessageDialog(this, "Ocorreu um erroc: \n" + e.getMessage(),
                     "Erro:", JOptionPane.ERROR_MESSAGE);
             e.printStackTrace();
         }
@@ -689,7 +689,7 @@ public class FrmVenda extends javax.swing.JFrame {
                     + e.getMessage(), "Erro:", JOptionPane.ERROR_MESSAGE);
             e.printStackTrace();
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "Ocorreu um erro: " + e.getMessage(),
+            JOptionPane.showMessageDialog(null, "Ocorreu um erro x: " + e.getMessage(),
                     "Erro:", JOptionPane.ERROR_MESSAGE);
             e.printStackTrace();
         }
@@ -749,7 +749,7 @@ public class FrmVenda extends javax.swing.JFrame {
                     + e.getMessage(), "Erro:", JOptionPane.ERROR_MESSAGE);
             e.printStackTrace();
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "Ocorreu um erro: " + e.getMessage(),
+            JOptionPane.showMessageDialog(null, "Ocorreu um errox: " + e.getMessage(),
                     "Erro:", JOptionPane.ERROR_MESSAGE);
             e.printStackTrace();
         }
@@ -783,7 +783,7 @@ public class FrmVenda extends javax.swing.JFrame {
                 }
             }
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "Ocorreu um erro: "
+            JOptionPane.showMessageDialog(null, "Ocorreu um errov: "
                     + e.getMessage(), "Erro:", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_btnExcluirActionPerformed
@@ -826,7 +826,7 @@ public class FrmVenda extends javax.swing.JFrame {
                     + "Ocorreu um erro no valor informado para o número da venda: \n"
                     + e.getMessage(), "Erro:", JOptionPane.ERROR_MESSAGE);
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "Ocorreu um erro: \n"
+            JOptionPane.showMessageDialog(null, "Ocorreu um errob: \n"
                     + e.getMessage(), "Erro:", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_btnPesquisarActionPerformed
@@ -867,7 +867,7 @@ public class FrmVenda extends javax.swing.JFrame {
                     "Erro:", JOptionPane.ERROR_MESSAGE);
             e.printStackTrace();
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "Ocorreu um erro: \n" + e.getMessage(),
+            JOptionPane.showMessageDialog(null, "Ocorreu um erron: \n" + e.getMessage(),
                     "Erro:", JOptionPane.ERROR_MESSAGE);
             e.printStackTrace();
         }
@@ -944,7 +944,7 @@ public class FrmVenda extends javax.swing.JFrame {
                     "Erro:", JOptionPane.ERROR_MESSAGE);
             e.printStackTrace();
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "Ocorreu um erro: \n" + e.getMessage(),
+            JOptionPane.showMessageDialog(null, "Ocorreu um errom: \n" + e.getMessage(),
                     "Erro:", JOptionPane.ERROR_MESSAGE);
             e.printStackTrace();
         }
@@ -1035,7 +1035,7 @@ public class FrmVenda extends javax.swing.JFrame {
                     dadosVendas.setValueAt(venda.getObs(), posicao, 5);
                 }
             } catch (Exception e) {
-                JOptionPane.showMessageDialog(null, "Ocorreu um erro: " + e.getMessage(), "Erro:", JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(null, "Ocorreu um erros: " + e.getMessage(), "Erro:", JOptionPane.ERROR_MESSAGE);
             }
         }
     }
@@ -1058,22 +1058,26 @@ public class FrmVenda extends javax.swing.JFrame {
                 //referência para posição da linha
                 int posicao = -1;
                 for (DaoItemVenda item : itens) {
+                    posicao++;
                     //incluindo linha em branco
                     dadosItens.addRow(Linha);
                     //preenchendo a linha em branco, célula a célula
                     dadosItens.setValueAt(item.getCodPro(), posicao, 0);
                     dadosItens.setValueAt(item.getDescricao(), posicao, 1);
                     dadosItens.setValueAt(item.getQuantidade(), posicao, 2);
+
                     //Usando o NumberFormatter 'nfPreco' para formatar os valores
                     dadosItens.setValueAt(nfPreco.valueToString(item.getPrecoUnit()), posicao, 3);
                     dadosItens.setValueAt(nfPreco.valueToString(item.getSubtotal()), posicao, 4);
+
                     total = total + item.getSubtotal();
                 }
+
                 // Após ter acumulado a somatória dos itens dessa Venda em 'total',
                 // vamos exibir formatado em txtTotal
                 txtTotalVenda.setText(nfPreco.valueToString(total));
             } catch (Exception e) {
-                JOptionPane.showMessageDialog(null, "Ocorreu um erro: " + e.getMessage(),
+                JOptionPane.showMessageDialog(null, "Ocorreu um erroa: " + e.getMessage(),
                         "Erro:", JOptionPane.ERROR_MESSAGE);
             }
         }
