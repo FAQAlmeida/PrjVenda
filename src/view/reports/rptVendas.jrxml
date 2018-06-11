@@ -1,0 +1,228 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="rptVendas" pageWidth="595" pageHeight="842" whenNoDataType="BlankPage" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="4a739422-b40a-482f-9b8c-8be9799f9ec6">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<style name="Title" forecolor="#FFFFFF" fontName="Times New Roman" fontSize="50" isBold="false" pdfFontName="Times-Bold"/>
+	<style name="SubTitle" forecolor="#CCCCCC" fontName="Times New Roman" fontSize="18" isBold="false" pdfFontName="Times-Roman"/>
+	<style name="Column header" forecolor="#666666" fontName="Times New Roman" fontSize="14" isBold="true" pdfFontName="Times-Roman"/>
+	<style name="Detail" mode="Transparent" fontName="Times New Roman" pdfFontName="Times-Roman"/>
+	<style name="Row" mode="Transparent" fontName="Times New Roman" pdfFontName="Times-Roman">
+		<conditionalStyle>
+			<conditionExpression><![CDATA[$V{REPORT_COUNT}%2 == 0]]></conditionExpression>
+			<style mode="Opaque" backcolor="#F0EFEF"/>
+		</conditionalStyle>
+	</style>
+	<queryString language="SQL">
+		<![CDATA[SELECT
+     pc_itemvenda.quantidade*pc_itemvenda.precounit AS SubTotal,
+     PC_ItemVenda."cod_pro" AS PC_ItemVenda_cod_pro,
+     PC_ItemVenda."numvenda" AS PC_ItemVenda_numvenda,
+     PC_Produto."descricao" AS PC_Produto_descricao,
+     PC_ItemVenda."quantidade" AS PC_ItemVenda_quantidade,
+     PC_ItemVenda."precounit" AS PC_ItemVenda_precounit,
+     PC_Venda."numvenda" AS PC_Venda_numvenda,
+     PC_Venda."cod_cli" AS PC_Venda_cod_cli,
+     PC_Venda."datavenda" AS PC_Venda_datavenda,
+     PC_Venda."dataentrega" AS PC_Venda_dataentrega,
+     PC_Venda."obs" AS PC_Venda_obs,
+     PC_Clientes."cod_cli" AS PC_Clientes_cod_cli,
+     PC_Clientes."nome" AS PC_Clientes_nome
+FROM
+     "dbo"."PC_Venda" PC_Venda INNER JOIN "dbo"."PC_ItemVenda" PC_ItemVenda ON PC_Venda."numvenda" = PC_ItemVenda."numvenda"
+     INNER JOIN "dbo"."PC_Produto" PC_Produto ON PC_ItemVenda."cod_pro" = PC_Produto."cod_pro"
+     INNER JOIN "dbo"."PC_Clientes" PC_Clientes ON PC_Venda."cod_cli" = PC_Clientes."cod_cli"]]>
+	</queryString>
+	<field name="SubTotal" class="java.lang.Double"/>
+	<field name="PC_ItemVenda_cod_pro" class="java.lang.Integer"/>
+	<field name="PC_ItemVenda_numvenda" class="java.lang.Integer"/>
+	<field name="PC_Produto_descricao" class="java.lang.String"/>
+	<field name="PC_ItemVenda_quantidade" class="java.lang.Integer"/>
+	<field name="PC_ItemVenda_precounit" class="java.lang.Double"/>
+	<field name="PC_Venda_numvenda" class="java.lang.Integer"/>
+	<field name="PC_Venda_cod_cli" class="java.lang.Integer"/>
+	<field name="PC_Venda_datavenda" class="java.sql.Timestamp"/>
+	<field name="PC_Venda_dataentrega" class="java.sql.Timestamp"/>
+	<field name="PC_Venda_obs" class="java.lang.String"/>
+	<field name="PC_Clientes_cod_cli" class="java.lang.Integer"/>
+	<field name="PC_Clientes_nome" class="java.lang.String"/>
+	<variable name="Total" class="java.lang.Double" resetType="Group" resetGroup="PC_Venda_numvenda" calculation="Sum">
+		<variableExpression><![CDATA[$F{SubTotal}]]></variableExpression>
+	</variable>
+	<group name="PC_Venda_numvenda">
+		<groupExpression><![CDATA[$F{PC_Venda_numvenda}]]></groupExpression>
+		<groupHeader>
+			<band height="37">
+				<textField isStretchWithOverflow="true">
+					<reportElement style="Detail" positionType="Float" x="77" y="0" width="143" height="37" uuid="8152392a-09ef-485c-b677-465607018774"/>
+					<textElement>
+						<font size="14"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{PC_Venda_obs}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true">
+					<reportElement style="Detail" positionType="Float" x="230" y="0" width="46" height="18" uuid="c4e8801c-4589-4fea-bef7-ee1e69f4125f"/>
+					<textElement>
+						<font size="14"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{PC_Produto_descricao}]]></textFieldExpression>
+				</textField>
+			</band>
+		</groupHeader>
+		<groupFooter>
+			<band height="6"/>
+		</groupFooter>
+	</group>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="132" splitType="Stretch">
+			<frame>
+				<reportElement mode="Opaque" x="0" y="0" width="552" height="100" backcolor="#000000" uuid="3074a726-bb99-4b05-970e-c24633d9e84e"/>
+				<staticText>
+					<reportElement style="Title" x="0" y="0" width="550" height="100" uuid="dcc715c8-2e86-4cc0-8fcf-e5dbfec03400"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font isBold="false"/>
+					</textElement>
+					<text><![CDATA[Relatório de Vendas]]></text>
+				</staticText>
+			</frame>
+			<frame>
+				<reportElement mode="Opaque" x="0" y="100" width="552" height="32" forecolor="#000000" backcolor="#CC0000" uuid="a6fc0455-87c1-486b-a096-4e69362f2ee9"/>
+				<textField pattern="EEEEE dd MMMMM yyyy">
+					<reportElement x="406" y="12" width="144" height="20" forecolor="#FFFFFF" uuid="e91fb35e-d6c6-49e4-adb6-eae5e245b22b"/>
+					<textElement textAlignment="Right">
+						<font size="12"/>
+					</textElement>
+					<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+				</textField>
+			</frame>
+		</band>
+	</title>
+	<pageHeader>
+		<band splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="26" splitType="Stretch">
+			<textField isStretchWithOverflow="true">
+				<reportElement style="SubTitle" isPrintRepeatedValues="false" x="0" y="2" width="29" height="24" forecolor="#000000" uuid="0c5ec43c-bda6-4ec3-9468-3cb919d9185d"/>
+				<textElement>
+					<font isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{PC_Venda_numvenda}]]></textFieldExpression>
+			</textField>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="18" splitType="Stretch">
+			<frame>
+				<reportElement style="Row" mode="Opaque" x="0" y="0" width="555" height="18" uuid="37c0fda8-783b-4868-a82b-75a8390c827e"/>
+				<textField isStretchWithOverflow="true">
+					<reportElement style="Detail" positionType="Float" x="46" y="0" width="46" height="18" uuid="ba5f90bc-b7f1-4fd0-ae06-13cd81223c69"/>
+					<textElement>
+						<font size="14"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{PC_ItemVenda_cod_pro}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true">
+					<reportElement style="Detail" positionType="Float" x="92" y="0" width="46" height="18" uuid="1a50f629-afeb-472d-9ab0-9d6d2b576429"/>
+					<textElement>
+						<font size="14"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{PC_ItemVenda_numvenda}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true">
+					<reportElement style="Detail" positionType="Float" x="184" y="0" width="46" height="18" uuid="4c3047bc-ba3f-4729-99ba-514e669914e0"/>
+					<textElement>
+						<font size="14"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{PC_ItemVenda_quantidade}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true">
+					<reportElement style="Detail" positionType="Float" x="230" y="0" width="46" height="18" uuid="621717b2-d418-446d-99ea-7eaaee9ac0d3"/>
+					<textElement>
+						<font size="14"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{PC_ItemVenda_precounit}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true">
+					<reportElement style="Detail" positionType="Float" x="276" y="0" width="46" height="18" uuid="90ef439f-a56d-4285-975c-a1ce16492a4e"/>
+					<textElement>
+						<font size="14"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{PC_Venda_cod_cli}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true">
+					<reportElement style="Detail" positionType="Float" x="322" y="0" width="46" height="18" uuid="dc738ff9-f489-485b-891b-0746d0774dc0"/>
+					<textElement>
+						<font size="14"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{PC_Venda_datavenda}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true">
+					<reportElement style="Detail" positionType="Float" x="368" y="0" width="46" height="18" uuid="20003c15-eea1-415b-86ae-5a0a83c6f685"/>
+					<textElement>
+						<font size="14"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{PC_Venda_dataentrega}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true">
+					<reportElement style="Detail" positionType="Float" x="460" y="0" width="46" height="18" uuid="c3c116d9-da87-4fe5-b33b-17ecede9a145"/>
+					<textElement>
+						<font size="14"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{PC_Clientes_cod_cli}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true">
+					<reportElement style="Detail" positionType="Float" x="506" y="0" width="46" height="18" uuid="a9cad12f-a4b5-4145-b362-0f0aa4f033a6"/>
+					<textElement>
+						<font size="14"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{PC_Clientes_nome}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true">
+					<reportElement style="Detail" positionType="Float" x="0" y="0" width="46" height="18" uuid="a8936fc6-84ad-4f6f-8c42-6d186b78661b"/>
+					<textElement>
+						<font size="14"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{SubTotal}]]></textFieldExpression>
+				</textField>
+			</frame>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="7" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="25" splitType="Stretch">
+			<frame>
+				<reportElement mode="Opaque" x="0" y="1" width="555" height="24" forecolor="#D0B48E" backcolor="#000000" uuid="eec2d5af-0381-4c35-8974-caef2541eb93"/>
+				<textField evaluationTime="Report">
+					<reportElement style="Column header" x="513" y="0" width="40" height="20" forecolor="#FFFFFF" uuid="4d1ea95e-bc3d-4451-9d9c-2735ca08afa6"/>
+					<textElement verticalAlignment="Middle">
+						<font size="10" isBold="false"/>
+					</textElement>
+					<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement style="Column header" x="433" y="0" width="80" height="20" forecolor="#FFFFFF" uuid="05aeb611-9cb1-48e6-880a-2f844d39a0d4"/>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font size="10" isBold="false"/>
+					</textElement>
+					<textFieldExpression><![CDATA["Page "+$V{PAGE_NUMBER}+" of"]]></textFieldExpression>
+				</textField>
+				<textField pattern="EEEEE dd MMMMM yyyy">
+					<reportElement style="Column header" x="2" y="1" width="197" height="20" forecolor="#FFFFFF" uuid="b166e701-9fe0-457c-841f-c60be5f1a089"/>
+					<textElement verticalAlignment="Middle">
+						<font size="10" isBold="false"/>
+					</textElement>
+					<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+				</textField>
+			</frame>
+		</band>
+	</pageFooter>
+	<summary>
+		<band splitType="Stretch"/>
+	</summary>
+</jasperReport>
