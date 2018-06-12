@@ -103,8 +103,11 @@ public class FrmClientes extends javax.swing.JFrame {
         pnlTable = new javax.swing.JScrollPane();
         tblClientes = new javax.swing.JTable();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
         addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosing(java.awt.event.WindowEvent evt) {
+                formWindowClosing(evt);
+            }
             public void windowOpened(java.awt.event.WindowEvent evt) {
                 formWindowOpened(evt);
             }
@@ -208,7 +211,8 @@ public class FrmClientes extends javax.swing.JFrame {
 
         jLabel8.setText("UF");
 
-        cmbUf.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] {"","AC","AL","AM","AP","BA","CE","DF","ES","GO","MA","MG","MS","MT","PA","PB","PE","PI","PR","RJ","RN","RO","RR","RS","SC","SE","SP","TO"}));
+        cmbUf.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] {"AC","AL","AM","AP","BA","CE","DF","ES","GO","MA","MG","MS","MT","PA","PB","PE","PI","PR","RJ","RN","RO","RR","RS","SC","SE","SP","TO"}));
+        cmbUf.setSelectedItem("SP");
 
         jLabel9.setText("Data de Nascimento");
 
@@ -316,8 +320,6 @@ public class FrmClientes extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-        tblClientes.setCellSelectionEnabled(false);
-        tblClientes.setRowSelectionAllowed(true);
         tblClientes.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         pnlTable.setViewportView(tblClientes);
         tblClientes.getColumnModel().getSelectionModel().setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
@@ -390,8 +392,8 @@ public class FrmClientes extends javax.swing.JFrame {
             cli.setCidade(txtCidade.getText());
             cli.setBairro(txtBairro.getText());
             cli.setUf(cmbUf.getSelectedItem().toString());
-            cli.setCep((String)txtCep.getValue());
-            cli.setTelefone((String)txtTelefone.getValue());
+            cli.setCep((String) txtCep.getValue());
+            cli.setTelefone((String) txtTelefone.getValue());
             cli.setDataNasc(sdf.parse(txtData.getText()));
             if (gravar) {
                 cli.Incluir();
@@ -416,7 +418,7 @@ public class FrmClientes extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Ocorreu um erro na formatação\n" + ex.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(null, "Occore um erro:\n" + ex.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
-        }finally {
+        } finally {
             try {
                 atualizaTable(new DaoCliente().Pesquisar());
             } catch (SQLException ex) {
@@ -436,6 +438,7 @@ public class FrmClientes extends javax.swing.JFrame {
         try {
             listaClientes = cli.Pesquisar();
             atualizaTable(listaClientes);
+            btnCancelarActionPerformed(null);
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Ocorreu um erro no DB \n" + ex.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
         } catch (ClassNotFoundException ex) {
@@ -490,6 +493,7 @@ public class FrmClientes extends javax.swing.JFrame {
         util.habilitarBotoes(true, pnlBotoes);
         util.habilitarComponentes(false, pnlComp);
         util.limparCampos(pnlComp);
+        cmbUf.setSelectedItem("SP");
         gravar = false;
         editar = false;
     }//GEN-LAST:event_btnCancelarActionPerformed
@@ -509,6 +513,13 @@ public class FrmClientes extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Ocorreu um erro\n" + ex.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_btnPesquisarActionPerformed
+
+    private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
+        Object[] options = {"Sim", "Não"};
+        if (JOptionPane.showOptionDialog(this, "Deseja mesmo sair?", "Aviso!", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, options, options[1]) == JOptionPane.YES_OPTION) {
+            dispose();
+        }
+    }//GEN-LAST:event_formWindowClosing
 
     private void atualizaTable(ArrayList<DaoCliente> clientes) throws Exception {
         try {
