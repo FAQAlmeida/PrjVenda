@@ -57,7 +57,7 @@ public class FrmItemVenda extends javax.swing.JDialog {
             txtQuantidade.setFormatterFactory(dffQtd);
             DaoProduto produto = new DaoProduto();
             pro = new ArrayList<DaoProduto>();
-            pro.addAll(produto.Pesquisar(produto));
+            pro.addAll(produto.Pesquisar());
             cmbProduto.removeAllItems();
             for (DaoProduto prod : pro) {
                 cmbProduto.addItem(String.valueOf(prod.getCodProd()));
@@ -66,15 +66,17 @@ public class FrmItemVenda extends javax.swing.JDialog {
                 cmbProduto.setSelectedItem(item.getCodPro());
                 txtQuantidade.setValue(item.getQuantidade());
             } else {
-                cmbProduto.setSelectedItem(0);
+                cmbProduto.setSelectedIndex(0);
             }
             setVisible(true);
         } catch (SQLException | ClassNotFoundException ex) {
             throw new SQLException("Ocorreu um erro no form de vendas" + ex.getMessage(), "Erro");
         }
-    }public static DaoItemVenda showItemVenda(DaoItemVenda item) throws SQLException, ClassNotFoundException{
-    FrmItemVenda frmItemVenda = new FrmItemVenda(item);
-    return itemRetorno;
+    }
+
+    public static DaoItemVenda showItemVenda(DaoItemVenda item) throws SQLException, ClassNotFoundException {
+        FrmItemVenda frmItemVenda = new FrmItemVenda(item);
+        return itemRetorno;
     }
 
     /**
@@ -104,6 +106,7 @@ public class FrmItemVenda extends javax.swing.JDialog {
 
         jLabel1.setText("Venda");
 
+        txtNumVenda.setEnabled(false);
         txtNumVenda.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtNumVendaActionPerformed(evt);
@@ -130,6 +133,7 @@ public class FrmItemVenda extends javax.swing.JDialog {
 
         jLabel5.setText("SubTotal");
 
+        txtSubtotal.setEnabled(false);
         txtSubtotal.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtSubtotalActionPerformed(evt);
@@ -143,6 +147,11 @@ public class FrmItemVenda extends javax.swing.JDialog {
             }
         });
 
+        txtQuantidade.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                txtQuantidadeFocusLost(evt);
+            }
+        });
         txtQuantidade.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtQuantidadeActionPerformed(evt);
@@ -251,16 +260,21 @@ public class FrmItemVenda extends javax.swing.JDialog {
     }//GEN-LAST:event_txtSubtotalActionPerformed
 
     private void cmbProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbProdutoActionPerformed
-        try{
-            txtProduto.setText(pro.get(cmbProduto.getSelectedIndex()).getDescricao());
-            txtQuantidade.setValue(1);
-            txtPreco.setText(nfPreco.valueToString(pro.get(cmbProduto.getSelectedIndex()).getPrecoUnit()));
-            txtSubtotal.setText(nfPreco.valueToString(Integer.parseInt(txtQuantidade.getText()) * pro.get(cmbProduto.getSelectedIndex()).getPrecoUnit()));
-        }catch(ArrayIndexOutOfBoundsException ex){
-            JOptionPane.showMessageDialog(null, "Occoreu um erro:\nO código digitado não corresponde a um produto cadastrado\nValor: " + ex.getMessage(), "Erro:", JOptionPane.ERROR_MESSAGE);
-            ex.printStackTrace();
-        }catch(Exception ex){
-        
+        try {
+            pro.get(cmbProduto.getSelectedIndex()).getDescricao();
+                try {
+                    txtProduto.setText(pro.get(cmbProduto.getSelectedIndex()).getDescricao());
+                    txtQuantidade.setValue(1);
+                    txtPreco.setText(nfPreco.valueToString(pro.get(cmbProduto.getSelectedIndex()).getPrecoUnit()));
+                    txtSubtotal.setText(nfPreco.valueToString(Integer.parseInt(txtQuantidade.getText()) * pro.get(cmbProduto.getSelectedIndex()).getPrecoUnit()));
+                } catch (ArrayIndexOutOfBoundsException ex) {
+                    JOptionPane.showMessageDialog(null, "Ocorreu um erro:\nO código digitado não corresponde a um produto cadastrado123\nValor: " + ex.getMessage() + ex.getCause(), "Erro:", JOptionPane.ERROR_MESSAGE);
+                    ex.printStackTrace();
+                } catch (Exception ex) {
+
+                }
+            
+        } catch (Exception ex) {
         }
     }//GEN-LAST:event_cmbProdutoActionPerformed
 
@@ -271,31 +285,43 @@ public class FrmItemVenda extends javax.swing.JDialog {
 
     private void btnOkActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOkActionPerformed
         itemRetorno = new DaoItemVenda();
-        try{
+        try {
             itemRetorno.setNumVenda(Integer.valueOf(txtNumVenda.getText()));
             itemRetorno.setCodPro(pro.get(cmbProduto.getSelectedIndex()).getCodProd());
             itemRetorno.setDescricao(pro.get(cmbProduto.getSelectedIndex()).getDescricao());
             itemRetorno.setQuantidade(Integer.valueOf(txtQuantidade.getText()));
             itemRetorno.setPrecoUnit(pro.get(cmbProduto.getSelectedIndex()).getPrecoUnit());
             itemRetorno.setSubtotal(Integer.valueOf(txtQuantidade.getText()) * pro.get(cmbProduto.getSelectedIndex()).getPrecoUnit());
+            JOptionPane.showMessageDialog(null, itemRetorno.toString());
             dispose();
-        }catch(Exception ex){
-            JOptionPane.showMessageDialog(null, "Ocorreu um erro ao retornar o novo item para venda\n"+ex.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
-            
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(null, "Ocorreu um erro ao retornar o novo item para venda\n" + ex.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
+
         }
     }//GEN-LAST:event_btnOkActionPerformed
 
     private void txtQuantidadeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtQuantidadeActionPerformed
-        try{
+        try {
+            //JOptionPane.showMessageDialog(null, nfPreco.valueToString(Integer.valueOf(txtQuantidade.getText()) * pro.get(cmbProduto.getSelectedIndex()).getPrecoUnit()));
             txtSubtotal.setText(nfPreco.valueToString(Integer.valueOf(txtQuantidade.getText()) * pro.get(cmbProduto.getSelectedIndex()).getPrecoUnit()));
-        }catch(ParseException | ArithmeticException ex){
+        } catch (ParseException | ArithmeticException ex) {
             txtQuantidade.setValue((Integer) 1);
-        }catch(Exception ex){
+        } catch (Exception ex) {
             JOptionPane.showMessageDialog(null, "Ocorreu um erro ao calcular o subtotal" + ex.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_txtQuantidadeActionPerformed
 
-    
+    private void txtQuantidadeFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtQuantidadeFocusLost
+        try {
+            //JOptionPane.showMessageDialog(null, nfPreco.valueToString(Integer.valueOf(txtQuantidade.getText()) * pro.get(cmbProduto.getSelectedIndex()).getPrecoUnit()));
+            txtSubtotal.setText(nfPreco.valueToString(Integer.valueOf(txtQuantidade.getText()) * pro.get(cmbProduto.getSelectedIndex()).getPrecoUnit()));
+        } catch (ParseException | ArithmeticException ex) {
+            txtQuantidade.setValue((Integer) 1);
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(null, "Ocorreu um erro ao calcular o subtotal" + ex.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_txtQuantidadeFocusLost
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCancelar;

@@ -115,6 +115,9 @@
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="txtNumVenda">
+      <Properties>
+        <Property name="enabled" type="boolean" value="false"/>
+      </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtNumVendaActionPerformed"/>
       </Events>
@@ -150,6 +153,9 @@
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="txtSubtotal">
+      <Properties>
+        <Property name="enabled" type="boolean" value="false"/>
+      </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtSubtotalActionPerformed"/>
       </Events>
@@ -174,6 +180,7 @@
     </Component>
     <Component class="javax.swing.JFormattedTextField" name="txtQuantidade">
       <Events>
+        <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="txtQuantidadeFocusLost"/>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtQuantidadeActionPerformed"/>
       </Events>
     </Component>

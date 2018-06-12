@@ -110,4 +110,13 @@ public class DaoItemVenda extends ItemVenda {
         this.conexao.close();
         return listaItens;
     }
+
+    @Override
+    public String toString() {
+        return String.format(
+                "Venda: %s\ncodPro: %s\n"
+                + "Descricao: %s\nPrecoUnit: %s\nQuantidade: %s\nSubtotal: %s", 
+                getNumVenda(), getCodPro(), getDescricao(), getPrecoUnit(), getQuantidade(), getSubtotal());
+    }
+    
 }

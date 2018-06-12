@@ -64,6 +64,9 @@ public class FrmMenu extends javax.swing.JFrame {
             public void windowClosing(java.awt.event.WindowEvent evt) {
                 formWindowClosing(evt);
             }
+            public void windowOpened(java.awt.event.WindowEvent evt) {
+                formWindowOpened(evt);
+            }
         });
 
         jToolBar1.setFloatable(false);
@@ -171,6 +174,10 @@ public class FrmMenu extends javax.swing.JFrame {
             Logger.getLogger(FrmMenu.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_itemVendaActionPerformed
+
+    private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
+        setExtendedState(FrmMenu.MAXIMIZED_BOTH);
+    }//GEN-LAST:event_formWindowOpened
 
     /**
      * @param args the command line arguments
