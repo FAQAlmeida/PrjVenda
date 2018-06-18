@@ -353,10 +353,18 @@ public class FrmClientes extends javax.swing.JFrame {
 
     private void btnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirActionPerformed
         try {
-            int Codigo = Integer.valueOf(JOptionPane.showInputDialog(null, "Informe o código do cliente para excluir", "Excluir", JOptionPane.QUESTION_MESSAGE));
-            DaoCliente dc = new DaoCliente();
-            dc.setCodCli(Codigo);
-            dc.Excluir();
+//            int Codigo = Integer.valueOf(JOptionPane.showInputDialog(null, "Informe o código do cliente para excluir", "Excluir", JOptionPane.QUESTION_MESSAGE));
+            if (tblClientes.getSelectedRow() >= 0) {
+                int cod = Integer.parseInt(tblClientes.getValueAt(tblClientes.getSelectedRow(), 0).toString());
+                DaoCliente dc = new DaoCliente();
+                dc.setCodCli(cod);
+                Object[] options = {"Sim", "Não"};
+                if (JOptionPane.showOptionDialog(this, String.format("Deseja mesmo excluir o cliente de código %s?", dc.getCodCli()), "Aviso!", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, options, options[1]) == JOptionPane.YES_OPTION) {
+                    dc.Excluir();
+                } else {
+                    JOptionPane.showMessageDialog(null, "Selecione um registro para excluir", "Erro", JOptionPane.ERROR_MESSAGE);
+                }
+            }
             //formwindowOpened(null);
         } catch (NumberFormatException ex) {
             JOptionPane.showMessageDialog(null, "Insira um código válido", "Erro", JOptionPane.ERROR_MESSAGE);
@@ -527,7 +535,7 @@ public class FrmClientes extends javax.swing.JFrame {
             SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
             if (clientes.isEmpty()) {
                 JOptionPane.showMessageDialog(null, "Não foram encontrados registros no DB", "Atenção", JOptionPane.INFORMATION_MESSAGE);
-
+                atualizaTable(new DaoCliente().Pesquisar());
             } else {
                 DefaultTableModel dadosClientes = (DefaultTableModel) tblClientes.getModel();
                 String linha[] = new String[]{"", "", "", "", "", "", "", "", ""};

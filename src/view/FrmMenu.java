@@ -115,6 +115,11 @@ public class FrmMenu extends javax.swing.JFrame {
         menuRelatório.setText("Relatório");
 
         itemRptCliente.setText("Relatório de Cliente");
+        itemRptCliente.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                itemRptClienteActionPerformed(evt);
+            }
+        });
         menuRelatório.add(itemRptCliente);
 
         jMenuBar1.add(menuRelatório);
@@ -178,6 +183,10 @@ public class FrmMenu extends javax.swing.JFrame {
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
         setExtendedState(FrmMenu.MAXIMIZED_BOTH);
     }//GEN-LAST:event_formWindowOpened
+
+    private void itemRptClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemRptClienteActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_itemRptClienteActionPerformed
 
     /**
      * @param args the command line arguments

@@ -45,6 +45,7 @@ public class FrmProdutos extends javax.swing.JFrame {
             util.habilitarComponentes(false, pnlCampos);
             btnGravar.setEnabled(false);
             btnCancelar.setEnabled(false);
+            chkPreencher.setVisible(false);
             //autofillParaTeste(false); //autocompleta a tabela com 4 produtos. Mudar para false na apresentação.
             DaoProduto prod = new DaoProduto();
             pro.addAll(prod.Pesquisar());
@@ -136,7 +137,7 @@ public class FrmProdutos extends javax.swing.JFrame {
         });
 
         btnAlterar.setMnemonic('a');
-        btnAlterar.setText("Editar");
+        btnAlterar.setText("Alterar");
         btnAlterar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnAlterarActionPerformed(evt);
@@ -210,6 +211,7 @@ public class FrmProdutos extends javax.swing.JFrame {
 
         lblCodigo.setText("Código");
 
+        txtCodigo.setEnabled(false);
         txtCodigo.setPreferredSize(new java.awt.Dimension(99, 24));
 
         lblDescricao.setText("Descrição");
@@ -459,69 +461,20 @@ public class FrmProdutos extends javax.swing.JFrame {
     }//GEN-LAST:event_btnExcluirActionPerformed
 
     private void btnPesquisarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPesquisarActionPerformed
-        switch (btnPesquisar.getText()) {
-            case "Pesquisar":
-                util.limparCampos(pnlCampos);
-                txtCodigo.setEnabled(true);
-                util.habilitarBotoes(false, pnlBotoes);
-                btnGravar.setEnabled(false);
-                btnPesquisar.setEnabled(true);
-                btnPesquisar.setText("OK");
-                break;
-            case "Atualizar":
-                btnPesquisar.setText("Pesquisar");
-                btnCancelarActionPerformed(null);
-                break;
-            default:
-                if (txtCodigo.getText().equals("")) {
+        DaoProduto prod = new DaoProduto();
+        int cod;
+        try {
+            String desc = JOptionPane.showInputDialog(null,
+                    "Informe o nome do produto para pesquisa", "Pesquisar", JOptionPane.QUESTION_MESSAGE);
+            prod.setDescricao(desc);
             try {
-                atualizaTabela(pro);
-            } catch (SQLException ex) {
-                Logger.getLogger(FrmProdutos.class.getName()).log(Level.SEVERE, null, ex);
-            } catch (ClassNotFoundException ex) {
+                ArrayList<DaoProduto> produto = prod.Pesquisar(prod);
+                atualizaTabela(produto);
+            } catch (SQLException | ClassNotFoundException ex) {
                 Logger.getLogger(FrmProdutos.class.getName()).log(Level.SEVERE, null, ex);
             }
-                    //btnPesquisar.setText("Pesquisar");
-                    btnCancelarActionPerformed(null);
-                } else {
-                    util.limparTable(tblProdutos);
-                    if (pro.isEmpty()) {
-                        JOptionPane.showMessageDialog(this, "Não há produtos registrados", "Atenção:", JOptionPane.WARNING_MESSAGE);
-                    } else {
-                        DefaultTableModel dadosProdutos = (DefaultTableModel) tblProdutos.getModel();
-                        String Linha[] = new String[]{"", "", "", ""};
-                        try {
-                            int posicao = -1;
-                            for (DaoProduto produto : pro) {
-                                if (produto.getCodProd() == Integer.parseInt(txtCodigo.getText())) {
-                                    posicao++;
-                                    dadosProdutos.addRow(Linha);
-                                    dadosProdutos.setValueAt(produto.getCodProd(), posicao, 0);
-                                    dadosProdutos.setValueAt(produto.getDescricao(), posicao, 1);
-                                    dadosProdutos.setValueAt(produto.getQuantidade(), posicao, 2);
-                                    dadosProdutos.setValueAt(mfPreco.valueToString(produto.getPrecoUnit()), posicao, 3);
-                                }
-                            }
-                            if (posicao == -1) {
-                                JOptionPane.showMessageDialog(null, "Não foi encontrado nenhum registro.\nA tabela será atualizada.");
-                                atualizaTabela(pro);
-                                btnCancelarActionPerformed(null);
-                                return;
-                            }
-                        } catch (Exception ex) {
-                            JOptionPane.showMessageDialog(null, "Ocorreu um erro: " + ex.getMessage(), "Erro:", JOptionPane.ERROR_MESSAGE);
-                        }
-                        util.limparCampos(pnlCampos);
-                        util.habilitarBotoes(true, pnlBotoes);
-                        btnCancelarActionPerformed(null);
-                        btnIncluir.setEnabled(false);
-                        btnAlterar.setEnabled(false);
-                        btnExcluir.setEnabled(false);
-                        btnPesquisar.setText("Atualizar");
-                        session = 1;
-                    }
-                }
-                break;
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(null, "Informe um código válido", "Erro", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_btnPesquisarActionPerformed
 // ——————— ActionPerformed dos 6 botões FIM ———————
@@ -609,6 +562,7 @@ public class FrmProdutos extends javax.swing.JFrame {
         if (produtos.isEmpty()) {
             JOptionPane.showMessageDialog(this, "Não foram encontrados produtos.",
                     "Atenção!", JOptionPane.WARNING_MESSAGE);
+            atualizaTabela(new DaoProduto().Pesquisar());
         } else {
             //Modelo de Tabela para popular tblClientes(JTable)
             DefaultTableModel dadosProdutos = (DefaultTableModel) tblProdutos.getModel();
@@ -617,7 +571,7 @@ public class FrmProdutos extends javax.swing.JFrame {
             try {
                 //Criado como referencia para posição da linha
                 int posicao = -1;
-                for (Produto produto : pro) {
+                for (Produto produto : produtos) {
                     posicao++;
                     //incluindo linha em branco
                     dadosProdutos.addRow(Linha);

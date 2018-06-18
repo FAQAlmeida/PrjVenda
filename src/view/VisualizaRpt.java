@@ -16,9 +16,9 @@ import java.util.Map;
 public class VisualizaRpt {
     public static void GeraRelatorio(String arquivoRpt, Map parameter, String titulo) throws Exception{
         Connection conn = BancoSql.getConnection();
-        //JasperPrint jp = JasperFillManager.fillReport("src/view/reports/" + arquivoRpt , parameter, conn);
-        //JasperView viewer = new JasperViewer(jp, false);
-        //viewer.setTitle(titulo);
-        //viewer.setVisible(true);
+//        JasperPrint jp = JasperFillManager.fillReport("src/view/reports/" + arquivoRpt , parameter, conn);
+//        JasperView viewer = new JasperViewer(jp, false);
+//        viewer.setTitle(titulo);
+//        viewer.setVisible(true);
     }
 }
