@@ -136,13 +136,13 @@ public class FrmVenda extends javax.swing.JFrame {
         jLabel7 = new javax.swing.JLabel();
         txtTotalVenda = new javax.swing.JTextField();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
         addWindowListener(new java.awt.event.WindowAdapter() {
-            public void windowOpened(java.awt.event.WindowEvent evt) {
-                formWindowOpened(evt);
-            }
             public void windowClosing(java.awt.event.WindowEvent evt) {
                 formWindowClosing(evt);
+            }
+            public void windowOpened(java.awt.event.WindowEvent evt) {
+                formWindowOpened(evt);
             }
         });
 
@@ -154,11 +154,12 @@ public class FrmVenda extends javax.swing.JFrame {
 
         jLabel1.setText("Núm Venda:");
 
+        txtNumVenda.setEnabled(false);
         txtNumVenda.setPreferredSize(new java.awt.Dimension(150, 20));
 
         txtCliente.setPreferredSize(new java.awt.Dimension(150, 20));
 
-        jLabel2.setText("Cliente");
+        jLabel2.setText("Cliente:");
 
         jLabel3.setText("Data Entrega:");
 
@@ -202,18 +203,19 @@ public class FrmVenda extends javax.swing.JFrame {
                                 .addComponent(jLabel5)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(txtDataVenda, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 97, Short.MAX_VALUE)
+                        .addGap(249, 249, 249)
                         .addGroup(pnlCamposVendaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(pnlCamposVendaLayout.createSequentialGroup()
-                                .addComponent(jLabel2)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(cmbCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(txtCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(39, 39, 39))
                             .addGroup(pnlCamposVendaLayout.createSequentialGroup()
-                                .addComponent(jLabel3)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(txtDataEntrega, javax.swing.GroupLayout.DEFAULT_SIZE, 184, Short.MAX_VALUE)))))
+                                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(cmbCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(10, 10, 10)))
+                        .addGroup(pnlCamposVendaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(txtCliente, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(txtDataEntrega, javax.swing.GroupLayout.DEFAULT_SIZE, 163, Short.MAX_VALUE))))
                 .addGap(73, 73, 73))
         );
         pnlCamposVendaLayout.setVerticalGroup(
@@ -398,6 +400,8 @@ public class FrmVenda extends javax.swing.JFrame {
                     .addContainerGap(147, Short.MAX_VALUE)))
         );
 
+        pnlBotoes.getAccessibleContext().setAccessibleName("pnlBotoes");
+
         pnlItens.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
         btnIncluirDetalhe.setText("Incluir");
@@ -415,8 +419,18 @@ public class FrmVenda extends javax.swing.JFrame {
         });
 
         btnPesquisarDetalhe.setText("Pesquisar");
+        btnPesquisarDetalhe.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnPesquisarDetalheActionPerformed(evt);
+            }
+        });
 
         btnExcluirDetalhe.setText("Excluir");
+        btnExcluirDetalhe.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnExcluirDetalheActionPerformed(evt);
+            }
+        });
 
         btnEncerrarDetalhe.setForeground(new java.awt.Color(255, 0, 51));
         btnEncerrarDetalhe.setText("Encerrar");
@@ -583,7 +597,10 @@ public class FrmVenda extends javax.swing.JFrame {
     }//GEN-LAST:event_tblVendasMouseClicked
 
     private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
-        dispose();
+        Object[] options = {"Sim", "Não"};
+        if (JOptionPane.showOptionDialog(this, "Deseja mesmo sair?", "Aviso!", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, options, options[1]) == JOptionPane.YES_OPTION) {
+            dispose();
+        }
     }//GEN-LAST:event_formWindowClosing
 
     private void btnSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSairActionPerformed
@@ -596,6 +613,7 @@ public class FrmVenda extends javax.swing.JFrame {
             habilitaBotoes(false, pnlBotoes);
             habilitaComponentes(false, pnlItens);
             habilitaComponentes(true, pnlCamposVenda);
+            txtNumVenda.setEnabled(false);
             cmbClienteActionPerformed(null);
             txtObs.setEnabled(true);
             limpaCampos(pnlCamposVenda);
@@ -623,7 +641,6 @@ public class FrmVenda extends javax.swing.JFrame {
         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
         try {
             if (incluir) {
-                venda.setNumVenda(Integer.valueOf(txtNumVenda.getText()));
                 venda.setCodCli(Integer.valueOf(cmbCliente.getSelectedItem().toString()));
                 venda.setDataVenda(sdf.parse(txtDataVenda.getText()));
                 venda.setDataEntrega(sdf.parse(txtDataEntrega.getText()));
@@ -648,7 +665,7 @@ public class FrmVenda extends javax.swing.JFrame {
 
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
         formWindowOpened(null);
-        habilitaBotoes(true, pnlVenda);
+        habilitaBotoes(true, pnlBotoes);
         limpaCampos(pnlCamposVenda);
         txtObs.setText("");
         habilitaComponentes(false, pnlCamposVenda);
@@ -679,6 +696,7 @@ public class FrmVenda extends javax.swing.JFrame {
                 }
             }
             habilitaComponentes(false, pnlCamposVenda);
+            habilitaBotoes(true, pnlBotoes);
             txtObs.setEnabled(false);
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(null, "Ocorreu um erro no Banco de dados:\n"
@@ -699,7 +717,8 @@ public class FrmVenda extends javax.swing.JFrame {
 
         DaoCliente cliente = new DaoCliente();
         try {
-            habilitaBotoes(false, pnlVenda);
+            habilitaBotoes(false, pnlBotoes);
+            txtNumVenda.setEnabled(false);
             habilitaComponentes(false, pnlItens);
             habilitaComponentes(true, pnlCamposVenda);
             // Atualizando os Clientes na memória
@@ -949,6 +968,57 @@ public class FrmVenda extends javax.swing.JFrame {
             e.printStackTrace();
         }
     }//GEN-LAST:event_btnAlterarDetalheActionPerformed
+
+    private void btnExcluirDetalheActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirDetalheActionPerformed
+        try {
+            Object[] botoes = {" Sim ", " não "};
+            DaoItemVenda item = new DaoItemVenda();
+            item.setNumVenda((Integer) tblVendas.getValueAt(tblVendas.getSelectedRow(), 0));
+            if (item.Pesquisar(item).isEmpty()) {
+                if (tblItens.getSelectedRow() >= 0) {
+                    item = it.get(tblItens.getSelectedRow());
+                    if (JOptionPane.showOptionDialog(null, "Deseja MESMO apagar o item?", "Atenção:", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, botoes, botoes[1]) == JOptionPane.YES_NO_OPTION) {
+                        it.remove(item);
+                        atualizaTableItens(it);
+                    }
+                } else {
+                    JOptionPane.showMessageDialog(null, "Selecione primeiro o item que deseja excluir", "Erro:", JOptionPane.ERROR_MESSAGE);
+                }
+            } else {
+                JOptionPane.showMessageDialog(null, "Não é possível remover itens nessa venda, ela está encerrada", "Erro:", JOptionPane.ERROR_MESSAGE);
+            }
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Ocorreu um erro no DB", "Erro:", JOptionPane.ERROR_MESSAGE);
+            Logger.getLogger(FrmVenda.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            JOptionPane.showMessageDialog(null, "A classe do jdbc não foi encontrada", "Erro:", JOptionPane.ERROR_MESSAGE);
+            Logger.getLogger(FrmVenda.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(null, "Ocorreu um erro \n" + ex.getMessage(), "Erro:", JOptionPane.ERROR_MESSAGE);
+            Logger.getLogger(FrmVenda.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_btnExcluirDetalheActionPerformed
+
+    private void btnPesquisarDetalheActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPesquisarDetalheActionPerformed
+        DaoItemVenda item = new DaoItemVenda();
+        String cod = JOptionPane.showInputDialog(null, "Informe o código do item para pesquisa", "Pesquisar", JOptionPane.QUESTION_MESSAGE);
+        item.setNumVenda((Integer) tblVendas.getValueAt(tblVendas.getSelectedRow(), 0));
+        try {
+            item.setCodPro(Integer.parseInt(cod));
+            try {
+                ArrayList<DaoItemVenda> listaClientes = item.Pesquisar(item);
+                atualizaTableItens(listaClientes);
+            } catch (SQLException ex) {
+                JOptionPane.showMessageDialog(null, "Ocorreu um erro no DB \n" + ex.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
+            } catch (ClassNotFoundException ex) {
+                JOptionPane.showMessageDialog(null, "Ocorreu de classe \n" + ex.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
+            } catch (Exception ex) {
+                JOptionPane.showMessageDialog(null, "Ocorreu um erro\n" + ex.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
+            }
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(null, "Informe um código válido", "Erro", JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_btnPesquisarDetalheActionPerformed
 
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */

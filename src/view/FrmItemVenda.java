@@ -125,6 +125,7 @@ public class FrmItemVenda extends javax.swing.JDialog {
 
         jLabel4.setText("Preço");
 
+        txtPreco.setEnabled(false);
         txtPreco.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtPrecoActionPerformed(evt);

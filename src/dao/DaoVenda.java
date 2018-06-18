@@ -41,11 +41,11 @@ public class DaoVenda extends Venda {
 
     @Override
     public void Alterar() throws SQLException, ClassNotFoundException {
-        String sql = "set dateformat dmy update pc_venda "
+        String sql = "set dateformat dmy update pc_venda set "
                 + "cod_cli = ?, "
                 + "datavenda = ?, "
                 + "dataEntrega = ?, "
-                + "obs = ?, "
+                + "obs = ? "
                 + "where numVenda = ? ";
         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
         this.conexao = BancoSql.getConnection();
@@ -55,7 +55,6 @@ public class DaoVenda extends Venda {
         comandoSql.setString(3, sdf.format(this.getDataEntrega()));
         comandoSql.setString(4, this.getObs());
         comandoSql.setInt(5, this.getNumVenda());
-
         comandoSql.execute();
         comandoSql.close();
         this.conexao.close();
