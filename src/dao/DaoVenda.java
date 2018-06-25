@@ -90,7 +90,7 @@ public class DaoVenda extends Venda {
         this.conexao = BancoSql.getConnection();
         comandoSql = conexao.prepareStatement(sql);
         if(venda.getNumVenda() > 0){
-            comandoSql.setString(1, "%" + venda.getNome() + "%");
+            comandoSql.setInt(1, venda.getNumVenda());
         }
         ResultSet rs = comandoSql.executeQuery();
         

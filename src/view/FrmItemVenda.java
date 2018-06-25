@@ -125,6 +125,7 @@ public class FrmItemVenda extends javax.swing.JDialog {
 
         jLabel4.setText("Preço");
 
+        txtPreco.setEnabled(false);
         txtPreco.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusLost(java.awt.event.FocusEvent evt) {
                 txtPrecoFocusLost(evt);
@@ -297,7 +298,6 @@ public class FrmItemVenda extends javax.swing.JDialog {
             itemRetorno.setQuantidade(Integer.valueOf(txtQuantidade.getText()));
             itemRetorno.setPrecoUnit(pro.get(cmbProduto.getSelectedIndex()).getPrecoUnit());
             itemRetorno.setSubtotal(Integer.valueOf(txtQuantidade.getText()) * pro.get(cmbProduto.getSelectedIndex()).getPrecoUnit());
-            JOptionPane.showMessageDialog(null, itemRetorno.toString());
             dispose();
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(null, "Ocorreu um erro ao retornar o novo item para venda\n" + ex.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
@@ -329,7 +329,7 @@ public class FrmItemVenda extends javax.swing.JDialog {
 
     private void txtPrecoFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtPrecoFocusLost
         try {
-            JOptionPane.showMessageDialog(null, nfPreco.valueToString(Integer.valueOf(txtQuantidade.getText()) * pro.get(cmbProduto.getSelectedIndex()).getPrecoUnit()));
+            //JOptionPane.showMessageDialog(null, nfPreco.valueToString(Integer.valueOf(txtQuantidade.getText()) * pro.get(cmbProduto.getSelectedIndex()).getPrecoUnit()));
             txtSubtotal.setText(nfPreco.valueToString(Integer.valueOf(txtQuantidade.getText()) * pro.get(cmbProduto.getSelectedIndex()).getPrecoUnit()));
         } catch (ParseException | ArithmeticException ex) {
             txtQuantidade.setValue((Integer) 1);

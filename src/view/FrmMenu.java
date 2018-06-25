@@ -58,6 +58,7 @@ public class FrmMenu extends javax.swing.JFrame {
         menuRelatório = new javax.swing.JMenu();
         itemRptCliente = new javax.swing.JMenuItem();
         itemRptVenda = new javax.swing.JMenuItem();
+        itemRptProdutos = new javax.swing.JMenuItem();
         menuAjuda = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
@@ -130,6 +131,14 @@ public class FrmMenu extends javax.swing.JFrame {
             }
         });
         menuRelatório.add(itemRptVenda);
+
+        itemRptProdutos.setText("Relatório de Produtos");
+        itemRptProdutos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                itemRptProdutosActionPerformed(evt);
+            }
+        });
+        menuRelatório.add(itemRptProdutos);
 
         jMenuBar1.add(menuRelatório);
 
@@ -209,6 +218,14 @@ public class FrmMenu extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_itemRptVendaActionPerformed
 
+    private void itemRptProdutosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemRptProdutosActionPerformed
+        try {
+            VisualizaRpt.GeraRelatorio("rptProdutos.jasper", null, "Relatório de Produtos");
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(null, "Ocorreu um erro: " + ex);
+        }
+    }//GEN-LAST:event_itemRptProdutosActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -248,6 +265,7 @@ public class FrmMenu extends javax.swing.JFrame {
     private javax.swing.JMenuItem itemCliente;
     private javax.swing.JMenuItem itemProduto;
     private javax.swing.JMenuItem itemRptCliente;
+    private javax.swing.JMenuItem itemRptProdutos;
     private javax.swing.JMenuItem itemRptVenda;
     private javax.swing.JMenuItem itemSair;
     private javax.swing.JMenuItem itemVenda;

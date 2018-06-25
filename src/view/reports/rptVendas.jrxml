@@ -2,7 +2,7 @@
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="rptVendas" pageWidth="595" pageHeight="842" whenNoDataType="BlankPage" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="4a739422-b40a-482f-9b8c-8be9799f9ec6">
 	<property name="ireport.zoom" value="1.331000000000001"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="77"/>
+	<property name="ireport.y" value="76"/>
 	<style name="Title" forecolor="#FFFFFF" fontName="Times New Roman" fontSize="50" isBold="false" pdfFontName="Times-Bold"/>
 	<style name="SubTitle" forecolor="#CCCCCC" fontName="Times New Roman" fontSize="18" isBold="false" pdfFontName="Times-Roman"/>
 	<style name="Column header" forecolor="#666666" fontName="Times New Roman" fontSize="14" isBold="true" pdfFontName="Times-Roman"/>
@@ -118,13 +118,12 @@ FROM
 				<rectangle>
 					<reportElement x="357" y="0" width="198" height="26" backcolor="#FF0033" uuid="f329fc77-e96b-4987-b044-3e2b26531947"/>
 				</rectangle>
-				<textField isStretchWithOverflow="true" pattern="¤ #,##0.00">
-					<reportElement style="Detail" positionType="Float" x="357" y="0" width="198" height="26" uuid="a8936fc6-84ad-4f6f-8c42-6d186b78661b"/>
-					<box leftPadding="10"/>
-					<textElement verticalAlignment="Middle">
-						<font size="14"/>
+				<textField pattern="R$ #,###,##0.00">
+					<reportElement x="357" y="0" width="196" height="26" uuid="ff37e349-9e89-4de1-8266-8f730cd8149b"/>
+					<textElement>
+						<font fontName="Times New Roman" size="14"/>
 					</textElement>
-					<textFieldExpression><![CDATA["Subtotal: R$ "+$F{SubTotal}]]></textFieldExpression>
+					<textFieldExpression><![CDATA[$V{Total}]]></textFieldExpression>
 				</textField>
 			</band>
 		</groupFooter>
@@ -165,12 +164,6 @@ FROM
 	<detail>
 		<band height="54" splitType="Stretch">
 			<rectangle>
-				<reportElement x="284" y="36" width="271" height="18" uuid="74d453f0-7976-4734-af72-9652fbbdfc5d"/>
-			</rectangle>
-			<rectangle>
-				<reportElement x="0" y="36" width="284" height="18" uuid="d7ccc328-b244-4770-9ea2-cfce100e9a83"/>
-			</rectangle>
-			<rectangle>
 				<reportElement x="0" y="18" width="555" height="18" uuid="d92fa602-1069-4988-8738-7ffadeef6d3d"/>
 			</rectangle>
 			<frame>
@@ -196,7 +189,7 @@ FROM
 				<textFieldExpression><![CDATA["Produto: " + $F{PC_Produto_descricao}]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true">
-				<reportElement style="Detail" positionType="Float" x="0" y="36" width="284" height="18" uuid="4c3047bc-ba3f-4729-99ba-514e669914e0"/>
+				<reportElement style="Detail" positionType="Float" x="0" y="36" width="180" height="18" uuid="4c3047bc-ba3f-4729-99ba-514e669914e0"/>
 				<box leftPadding="10"/>
 				<textElement verticalAlignment="Middle">
 					<font size="14"/>
@@ -204,12 +197,20 @@ FROM
 				<textFieldExpression><![CDATA["Quantidade: " + $F{PC_ItemVenda_quantidade}]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true" pattern="¤ #,##0.00">
-				<reportElement style="Detail" positionType="Float" x="284" y="36" width="271" height="18" uuid="621717b2-d418-446d-99ea-7eaaee9ac0d3"/>
+				<reportElement style="Detail" positionType="Float" x="180" y="36" width="177" height="18" uuid="621717b2-d418-446d-99ea-7eaaee9ac0d3"/>
 				<box leftPadding="10"/>
 				<textElement verticalAlignment="Middle">
 					<font size="14"/>
 				</textElement>
 				<textFieldExpression><![CDATA["Preço unitário: R$ "+$F{PC_ItemVenda_precounit}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" pattern="R$ #,###,##0.00">
+				<reportElement style="Detail" positionType="Float" x="357" y="36" width="198" height="18" uuid="a8936fc6-84ad-4f6f-8c42-6d186b78661b"/>
+				<box leftPadding="10"/>
+				<textElement verticalAlignment="Middle">
+					<font size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{SubTotal}]]></textFieldExpression>
 			</textField>
 		</band>
 	</detail>

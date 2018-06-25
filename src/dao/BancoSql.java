@@ -14,7 +14,7 @@ public class BancoSql {
 
     //Acesso direto usando driver JDBC class4 do SQL Server
     private static final String servidor = "com.microsoft.sqlserver.jdbc.SQLServerDriver";
-    private static final String urlBanco = "jdbc:sqlserver://172.168.255.252\\data:1433;";
+    private static final String urlBanco = "jdbc:sqlserver://172.168.255.252;";
     //jdbc:sqlserver://desktop-fqa\\fqasqlserver:1433;databaseName=db_05579_1_C_1_2017
     private static final String nomeBanco = "databaseName=db_05118_1_C_1_2017;";
     private static final String usuario = "user=05118_1_C_1_2017;";

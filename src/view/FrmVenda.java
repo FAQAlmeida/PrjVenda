@@ -815,7 +815,16 @@ public class FrmVenda extends javax.swing.JFrame {
             String numVendaTemp = JOptionPane.showInputDialog(this, "Informe o npumero da venda desejada:",
                     "Pesquisa:", JOptionPane.QUESTION_MESSAGE);
             // Se o número da Venda não for nulo
-            if (numVendaTemp != null) {
+            if (numVendaTemp.trim().equals("")) {
+                try {
+                    atualizaTableVendas(dv.Pesquisar(dv));
+                    tblVendas.setRowSelectionInterval(0, 0);
+                    tblVendasMouseClicked(null);
+                } catch (Exception ex) {
+                    JOptionPane.showMessageDialog(null, "A venda não foi encontrada",
+                            "Erro", JOptionPane.ERROR_MESSAGE);
+                }
+            } else if (numVendaTemp != null) {
                 dv.setNumVenda(Integer.valueOf(numVendaTemp));
                 div.setNumVenda(dv.getNumVenda());
                 if (dv.Pesquisar(dv).isEmpty()) {
@@ -916,6 +925,9 @@ public class FrmVenda extends javax.swing.JFrame {
                 e.printStackTrace();
             }
         }
+        else{
+            JOptionPane.showMessageDialog(null, "Não há produtos registrados para encerrar ou a venda esta encerrada");
+        }
     }//GEN-LAST:event_btnEncerrarDetalheActionPerformed
 
     private void btnAlterarDetalheActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAlterarDetalheActionPerformed
@@ -1004,7 +1016,9 @@ public class FrmVenda extends javax.swing.JFrame {
         String cod = JOptionPane.showInputDialog(null, "Informe o código do item para pesquisa", "Pesquisar", JOptionPane.QUESTION_MESSAGE);
         item.setNumVenda((Integer) tblVendas.getValueAt(tblVendas.getSelectedRow(), 0));
         try {
-            item.setCodPro(Integer.parseInt(cod));
+            if (!cod.trim().equals("")) {
+                item.setCodPro(Integer.parseInt(cod));
+            }
             try {
                 ArrayList<DaoItemVenda> listaClientes = item.Pesquisar(item);
                 atualizaTableItens(listaClientes);

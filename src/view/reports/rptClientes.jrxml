@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="rptClientes" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="5d058312-a785-4717-80da-a806b4a288dd">
-	<property name="ireport.zoom" value="1.0000000000000033"/>
-	<property name="ireport.x" value="0"/>
+	<property name="ireport.zoom" value="1.6105100000000099"/>
+	<property name="ireport.x" value="23"/>
 	<property name="ireport.y" value="0"/>
 	<style name="Title" forecolor="#FFFFFF" fontName="Times New Roman" fontSize="500" isBold="false" pdfFontName="Times-Bold"/>
 	<style name="SubTitle" forecolor="#CCCCCC" fontName="Times New Roman" fontSize="18" isBold="false" pdfFontName="Times-Roman"/>
@@ -42,10 +42,10 @@ FROM
 			<frame>
 				<reportElement x="0" y="0" width="555" height="100" uuid="e316d904-6eb1-4282-b968-029af86ff59a"/>
 				<rectangle>
-					<reportElement x="0" y="0" width="553" height="100" forecolor="#FFFFFF" backcolor="#000000" uuid="39775a32-1eb1-4c16-acad-1329f1d1653f"/>
+					<reportElement x="0" y="0" width="555" height="100" forecolor="#FFFFFF" backcolor="#000000" uuid="39775a32-1eb1-4c16-acad-1329f1d1653f"/>
 				</rectangle>
 				<staticText>
-					<reportElement x="0" y="0" width="451" height="100" forecolor="#FFFFFF" uuid="5f65d300-2a5f-4b24-9012-9611630f5850"/>
+					<reportElement x="0" y="0" width="555" height="100" forecolor="#FFFFFF" uuid="5f65d300-2a5f-4b24-9012-9611630f5850"/>
 					<textElement textAlignment="Center" verticalAlignment="Middle">
 						<font fontName="Times New Roman" size="50"/>
 					</textElement>
