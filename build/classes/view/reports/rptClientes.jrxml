@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="rptClientes" language="groovy" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="5d058312-a785-4717-80da-a806b4a288dd">
-	<property name="ireport.zoom" value="1.2100000000000002"/>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="rptClientes" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="5d058312-a785-4717-80da-a806b4a288dd">
+	<property name="ireport.zoom" value="1.0000000000000033"/>
 	<property name="ireport.x" value="0"/>
 	<property name="ireport.y" value="0"/>
-	<style name="Title" forecolor="#FFFFFF" fontName="Times New Roman" fontSize="50" isBold="false" pdfFontName="Times-Bold"/>
+	<style name="Title" forecolor="#FFFFFF" fontName="Times New Roman" fontSize="500" isBold="false" pdfFontName="Times-Bold"/>
 	<style name="SubTitle" forecolor="#CCCCCC" fontName="Times New Roman" fontSize="18" isBold="false" pdfFontName="Times-Roman"/>
 	<style name="Column header" forecolor="#666666" fontName="Times New Roman" fontSize="14" isBold="true" pdfFontName="Times-Roman"/>
 	<style name="Detail" mode="Transparent" fontName="Times New Roman" pdfFontName="Times-Roman"/>
@@ -40,17 +40,24 @@ FROM
 	<title>
 		<band height="132" splitType="Stretch">
 			<frame>
-				<reportElement mode="Opaque" x="0" y="0" width="553" height="95" backcolor="#000000" uuid="68334743-2e44-4236-a0ff-23e1000b73e2"/>
+				<reportElement x="0" y="0" width="555" height="100" uuid="e316d904-6eb1-4282-b968-029af86ff59a"/>
+				<rectangle>
+					<reportElement x="0" y="0" width="553" height="100" forecolor="#FFFFFF" backcolor="#000000" uuid="39775a32-1eb1-4c16-acad-1329f1d1653f"/>
+				</rectangle>
 				<staticText>
-					<reportElement style="Title" x="0" y="0" width="553" height="95" uuid="7d61163f-4877-4270-aabe-fac2d301435b"/>
+					<reportElement x="0" y="0" width="451" height="100" forecolor="#FFFFFF" uuid="5f65d300-2a5f-4b24-9012-9611630f5850"/>
 					<textElement textAlignment="Center" verticalAlignment="Middle">
-						<font isBold="false"/>
+						<font fontName="Times New Roman" size="50"/>
 					</textElement>
 					<text><![CDATA[Relatório de Clientes]]></text>
 				</staticText>
+				<image scaleImage="RetainShape" hAlign="Center" vAlign="Middle">
+					<reportElement x="451" y="2" width="102" height="98" uuid="abb81470-fe58-48ed-8b94-a27d3ceacf90"/>
+					<imageExpression><![CDATA["C:\\Users\\otavi\\OneDrive\\Documentos\\Projetos\\JAVA\\PrjVenda\\src\\view\\reports\\1522329017011.png"]]></imageExpression>
+				</image>
 			</frame>
 			<frame>
-				<reportElement mode="Opaque" x="0" y="100" width="553" height="32" forecolor="#000000" backcolor="#CC0000" uuid="66b43138-d049-4181-b41b-5925abc0f49c"/>
+				<reportElement mode="Opaque" x="0" y="100" width="555" height="32" forecolor="#000000" backcolor="#CC0000" uuid="66b43138-d049-4181-b41b-5925abc0f49c"/>
 				<textField pattern="EEEEE, dd MMMMM yyyy">
 					<reportElement x="372" y="11" width="165" height="20" forecolor="#FFFFFF" uuid="9a3df18d-0acb-4076-b18e-115c6db210b0"/>
 					<textElement textAlignment="Right">
@@ -162,9 +169,9 @@ FROM
 					<textElement textAlignment="Center" verticalAlignment="Middle">
 						<font size="10"/>
 					</textElement>
-					<textFieldExpression><![CDATA["(" + $F{Telefone}.substring( 0, 2 ) + ") "
-+ $F{Telefone}.substring( 2, 7 ) + "-"
-+ $F{Telefone}.substring( 7, 11 )]]></textFieldExpression>
+					<textFieldExpression><![CDATA["(" + $F{Telefone}.substring(0, 2) + ") "
++ $F{Telefone}.substring(2, 6) + "-"
++ $F{Telefone}.substring(6, 10)]]></textFieldExpression>
 				</textField>
 				<textField isStretchWithOverflow="true" pattern="dd/MM/yyyy">
 					<reportElement style="Detail" positionType="Float" x="451" y="0" width="102" height="18" uuid="d1065d10-e74a-4466-8972-8c41bcdab9cf"/>

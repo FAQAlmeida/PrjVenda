@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="rptVendas" pageWidth="595" pageHeight="842" whenNoDataType="BlankPage" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="4a739422-b40a-482f-9b8c-8be9799f9ec6">
-	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.zoom" value="1.331000000000001"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="0"/>
+	<property name="ireport.y" value="183"/>
 	<style name="Title" forecolor="#FFFFFF" fontName="Times New Roman" fontSize="50" isBold="false" pdfFontName="Times-Bold"/>
 	<style name="SubTitle" forecolor="#CCCCCC" fontName="Times New Roman" fontSize="18" isBold="false" pdfFontName="Times-Roman"/>
 	<style name="Column header" forecolor="#666666" fontName="Times New Roman" fontSize="14" isBold="true" pdfFontName="Times-Roman"/>
@@ -52,44 +52,104 @@ FROM
 	<group name="PC_Venda_numvenda">
 		<groupExpression><![CDATA[$F{PC_Venda_numvenda}]]></groupExpression>
 		<groupHeader>
-			<band height="37">
+			<band height="92">
+				<rectangle>
+					<reportElement x="0" y="37" width="218" height="54" uuid="7db71630-e3a5-46d2-b08d-0df053d78120"/>
+				</rectangle>
+				<rectangle>
+					<reportElement x="218" y="37" width="113" height="54" uuid="ac194d03-c2f2-4e78-8587-79b92a46af50"/>
+				</rectangle>
+				<rectangle>
+					<reportElement x="331" y="37" width="113" height="54" uuid="40c923f5-bcec-4fac-a1ad-5c64f47058c6"/>
+				</rectangle>
+				<rectangle>
+					<reportElement x="444" y="37" width="111" height="54" uuid="5cf44d25-2213-489a-8370-b65115fc01e2"/>
+				</rectangle>
+				<rectangle>
+					<reportElement x="0" y="0" width="555" height="37" backcolor="#999999" uuid="cf472361-489c-44cc-a75b-aaa542eb3225"/>
+				</rectangle>
 				<textField isStretchWithOverflow="true">
-					<reportElement style="Detail" positionType="Float" x="77" y="0" width="143" height="37" uuid="8152392a-09ef-485c-b677-465607018774"/>
-					<textElement>
+					<reportElement style="Detail" positionType="Float" x="0" y="37" width="218" height="54" uuid="8152392a-09ef-485c-b677-465607018774"/>
+					<box leftPadding="10"/>
+					<textElement verticalAlignment="Middle">
 						<font size="14"/>
 					</textElement>
-					<textFieldExpression><![CDATA[$F{PC_Venda_obs}]]></textFieldExpression>
+					<textFieldExpression><![CDATA["Observação: \n" + $F{PC_Venda_obs}]]></textFieldExpression>
 				</textField>
 				<textField isStretchWithOverflow="true">
-					<reportElement style="Detail" positionType="Float" x="230" y="0" width="46" height="18" uuid="c4e8801c-4589-4fea-bef7-ee1e69f4125f"/>
-					<textElement>
+					<reportElement style="Detail" positionType="Float" x="218" y="37" width="113" height="54" uuid="dc738ff9-f489-485b-891b-0746d0774dc0"/>
+					<box leftPadding="10"/>
+					<textElement verticalAlignment="Middle">
 						<font size="14"/>
 					</textElement>
-					<textFieldExpression><![CDATA[$F{PC_Produto_descricao}]]></textFieldExpression>
+					<textFieldExpression><![CDATA["Data da Venda: \n" + new SimpleDateFormat("dd/MM/yyyy").format(new Date($F{PC_Venda_datavenda}.getTime()))]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true">
+					<reportElement style="Detail" positionType="Float" x="331" y="37" width="113" height="54" uuid="20003c15-eea1-415b-86ae-5a0a83c6f685"/>
+					<box leftPadding="10"/>
+					<textElement verticalAlignment="Middle">
+						<font size="14"/>
+					</textElement>
+					<textFieldExpression><![CDATA["Data de Entrega: \n" + new SimpleDateFormat("dd/MM/yyyy").format(new Date($F{PC_Venda_dataentrega}.getTime()))]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true">
+					<reportElement style="Detail" positionType="Float" x="444" y="37" width="111" height="54" uuid="a9cad12f-a4b5-4145-b362-0f0aa4f033a6"/>
+					<box leftPadding="10"/>
+					<textElement verticalAlignment="Middle">
+						<font size="14"/>
+					</textElement>
+					<textFieldExpression><![CDATA["Cliente: \n" + $F{PC_Clientes_nome}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true">
+					<reportElement style="SubTitle" isPrintRepeatedValues="false" x="0" y="0" width="555" height="37" forecolor="#000000" backcolor="#999999" uuid="0c5ec43c-bda6-4ec3-9468-3cb919d9185d"/>
+					<box leftPadding="10" rightPadding="10"/>
+					<textElement verticalAlignment="Middle">
+						<font isBold="false"/>
+					</textElement>
+					<textFieldExpression><![CDATA["Código da venda: " + $F{PC_Venda_numvenda}]]></textFieldExpression>
 				</textField>
 			</band>
 		</groupHeader>
 		<groupFooter>
-			<band height="6"/>
+			<band height="40">
+				<rectangle>
+					<reportElement x="0" y="0" width="555" height="26" uuid="ed943d97-7d1d-492f-824b-5dc2cacc9887"/>
+				</rectangle>
+				<rectangle>
+					<reportElement x="357" y="0" width="198" height="26" backcolor="#FF0033" uuid="f329fc77-e96b-4987-b044-3e2b26531947"/>
+				</rectangle>
+				<textField isStretchWithOverflow="true" pattern="¤ #,##0.00">
+					<reportElement style="Detail" positionType="Float" x="357" y="0" width="198" height="26" uuid="a8936fc6-84ad-4f6f-8c42-6d186b78661b"/>
+					<box leftPadding="10"/>
+					<textElement verticalAlignment="Middle">
+						<font size="14"/>
+					</textElement>
+					<textFieldExpression><![CDATA["Subtotal: R$ "+$F{SubTotal}]]></textFieldExpression>
+				</textField>
+			</band>
 		</groupFooter>
 	</group>
 	<background>
 		<band splitType="Stretch"/>
 	</background>
 	<title>
-		<band height="132" splitType="Stretch">
+		<band height="140" splitType="Stretch">
 			<frame>
-				<reportElement mode="Opaque" x="0" y="0" width="552" height="100" backcolor="#000000" uuid="3074a726-bb99-4b05-970e-c24633d9e84e"/>
+				<reportElement mode="Opaque" x="0" y="0" width="555" height="100" backcolor="#000000" uuid="3074a726-bb99-4b05-970e-c24633d9e84e"/>
 				<staticText>
-					<reportElement style="Title" x="0" y="0" width="550" height="100" uuid="dcc715c8-2e86-4cc0-8fcf-e5dbfec03400"/>
+					<reportElement style="Title" x="0" y="0" width="433" height="100" uuid="dcc715c8-2e86-4cc0-8fcf-e5dbfec03400"/>
 					<textElement textAlignment="Center" verticalAlignment="Middle">
 						<font isBold="false"/>
 					</textElement>
 					<text><![CDATA[Relatório de Vendas]]></text>
 				</staticText>
+				<image hAlign="Center" vAlign="Middle">
+					<reportElement x="433" y="0" width="122" height="100" uuid="898417b5-1aec-48af-afb1-b3ed9d1620b8"/>
+					<imageExpression><![CDATA["C:\\Users\\otavi\\OneDrive\\Documentos\\Projetos\\JAVA\\PrjVenda\\src\\view\\reports\\icone-webmotors-venda-por-mais.png"]]></imageExpression>
+				</image>
 			</frame>
 			<frame>
-				<reportElement mode="Opaque" x="0" y="100" width="552" height="32" forecolor="#000000" backcolor="#CC0000" uuid="a6fc0455-87c1-486b-a096-4e69362f2ee9"/>
+				<reportElement mode="Opaque" x="0" y="100" width="555" height="32" forecolor="#000000" backcolor="#CC0000" uuid="a6fc0455-87c1-486b-a096-4e69362f2ee9"/>
 				<textField pattern="EEEEE dd MMMMM yyyy">
 					<reportElement x="406" y="12" width="144" height="20" forecolor="#FFFFFF" uuid="e91fb35e-d6c6-49e4-adb6-eae5e245b22b"/>
 					<textElement textAlignment="Right">
@@ -104,95 +164,61 @@ FROM
 		<band splitType="Stretch"/>
 	</pageHeader>
 	<columnHeader>
-		<band height="26" splitType="Stretch">
-			<textField isStretchWithOverflow="true">
-				<reportElement style="SubTitle" isPrintRepeatedValues="false" x="0" y="2" width="29" height="24" forecolor="#000000" uuid="0c5ec43c-bda6-4ec3-9468-3cb919d9185d"/>
-				<textElement>
-					<font isBold="false"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$F{PC_Venda_numvenda}]]></textFieldExpression>
-			</textField>
-		</band>
+		<band splitType="Stretch"/>
 	</columnHeader>
 	<detail>
-		<band height="18" splitType="Stretch">
+		<band height="54" splitType="Stretch">
+			<rectangle>
+				<reportElement x="284" y="36" width="271" height="18" uuid="74d453f0-7976-4734-af72-9652fbbdfc5d"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="0" y="36" width="284" height="18" uuid="d7ccc328-b244-4770-9ea2-cfce100e9a83"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="0" y="18" width="555" height="18" uuid="d92fa602-1069-4988-8738-7ffadeef6d3d"/>
+			</rectangle>
 			<frame>
 				<reportElement style="Row" mode="Opaque" x="0" y="0" width="555" height="18" uuid="37c0fda8-783b-4868-a82b-75a8390c827e"/>
+				<rectangle>
+					<reportElement x="0" y="0" width="555" height="18" backcolor="#CCCCCC" uuid="fe066c09-1e67-45ed-9aef-d6d0b49cd08d"/>
+				</rectangle>
 				<textField isStretchWithOverflow="true">
-					<reportElement style="Detail" positionType="Float" x="46" y="0" width="46" height="18" uuid="ba5f90bc-b7f1-4fd0-ae06-13cd81223c69"/>
-					<textElement>
+					<reportElement style="Detail" positionType="Float" x="0" y="0" width="555" height="18" uuid="ba5f90bc-b7f1-4fd0-ae06-13cd81223c69"/>
+					<box leftPadding="10"/>
+					<textElement verticalAlignment="Middle">
 						<font size="14"/>
 					</textElement>
-					<textFieldExpression><![CDATA[$F{PC_ItemVenda_cod_pro}]]></textFieldExpression>
-				</textField>
-				<textField isStretchWithOverflow="true">
-					<reportElement style="Detail" positionType="Float" x="92" y="0" width="46" height="18" uuid="1a50f629-afeb-472d-9ab0-9d6d2b576429"/>
-					<textElement>
-						<font size="14"/>
-					</textElement>
-					<textFieldExpression><![CDATA[$F{PC_ItemVenda_numvenda}]]></textFieldExpression>
-				</textField>
-				<textField isStretchWithOverflow="true">
-					<reportElement style="Detail" positionType="Float" x="184" y="0" width="46" height="18" uuid="4c3047bc-ba3f-4729-99ba-514e669914e0"/>
-					<textElement>
-						<font size="14"/>
-					</textElement>
-					<textFieldExpression><![CDATA[$F{PC_ItemVenda_quantidade}]]></textFieldExpression>
-				</textField>
-				<textField isStretchWithOverflow="true">
-					<reportElement style="Detail" positionType="Float" x="230" y="0" width="46" height="18" uuid="621717b2-d418-446d-99ea-7eaaee9ac0d3"/>
-					<textElement>
-						<font size="14"/>
-					</textElement>
-					<textFieldExpression><![CDATA[$F{PC_ItemVenda_precounit}]]></textFieldExpression>
-				</textField>
-				<textField isStretchWithOverflow="true">
-					<reportElement style="Detail" positionType="Float" x="276" y="0" width="46" height="18" uuid="90ef439f-a56d-4285-975c-a1ce16492a4e"/>
-					<textElement>
-						<font size="14"/>
-					</textElement>
-					<textFieldExpression><![CDATA[$F{PC_Venda_cod_cli}]]></textFieldExpression>
-				</textField>
-				<textField isStretchWithOverflow="true">
-					<reportElement style="Detail" positionType="Float" x="322" y="0" width="46" height="18" uuid="dc738ff9-f489-485b-891b-0746d0774dc0"/>
-					<textElement>
-						<font size="14"/>
-					</textElement>
-					<textFieldExpression><![CDATA[$F{PC_Venda_datavenda}]]></textFieldExpression>
-				</textField>
-				<textField isStretchWithOverflow="true">
-					<reportElement style="Detail" positionType="Float" x="368" y="0" width="46" height="18" uuid="20003c15-eea1-415b-86ae-5a0a83c6f685"/>
-					<textElement>
-						<font size="14"/>
-					</textElement>
-					<textFieldExpression><![CDATA[$F{PC_Venda_dataentrega}]]></textFieldExpression>
-				</textField>
-				<textField isStretchWithOverflow="true">
-					<reportElement style="Detail" positionType="Float" x="460" y="0" width="46" height="18" uuid="c3c116d9-da87-4fe5-b33b-17ecede9a145"/>
-					<textElement>
-						<font size="14"/>
-					</textElement>
-					<textFieldExpression><![CDATA[$F{PC_Clientes_cod_cli}]]></textFieldExpression>
-				</textField>
-				<textField isStretchWithOverflow="true">
-					<reportElement style="Detail" positionType="Float" x="506" y="0" width="46" height="18" uuid="a9cad12f-a4b5-4145-b362-0f0aa4f033a6"/>
-					<textElement>
-						<font size="14"/>
-					</textElement>
-					<textFieldExpression><![CDATA[$F{PC_Clientes_nome}]]></textFieldExpression>
-				</textField>
-				<textField isStretchWithOverflow="true">
-					<reportElement style="Detail" positionType="Float" x="0" y="0" width="46" height="18" uuid="a8936fc6-84ad-4f6f-8c42-6d186b78661b"/>
-					<textElement>
-						<font size="14"/>
-					</textElement>
-					<textFieldExpression><![CDATA[$F{SubTotal}]]></textFieldExpression>
+					<textFieldExpression><![CDATA["Código Produto: " + $F{PC_ItemVenda_cod_pro}]]></textFieldExpression>
 				</textField>
 			</frame>
+			<textField isStretchWithOverflow="true">
+				<reportElement style="Detail" positionType="Float" x="0" y="18" width="555" height="18" uuid="c4e8801c-4589-4fea-bef7-ee1e69f4125f"/>
+				<box leftPadding="10"/>
+				<textElement verticalAlignment="Middle">
+					<font size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Produto: " + $F{PC_Produto_descricao}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement style="Detail" positionType="Float" x="0" y="36" width="284" height="18" uuid="4c3047bc-ba3f-4729-99ba-514e669914e0"/>
+				<box leftPadding="10"/>
+				<textElement verticalAlignment="Middle">
+					<font size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Quantidade: " + $F{PC_ItemVenda_quantidade}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" pattern="¤ #,##0.00">
+				<reportElement style="Detail" positionType="Float" x="284" y="36" width="271" height="18" uuid="621717b2-d418-446d-99ea-7eaaee9ac0d3"/>
+				<box leftPadding="10"/>
+				<textElement verticalAlignment="Middle">
+					<font size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Preço unitário: R$ "+$F{PC_ItemVenda_precounit}]]></textFieldExpression>
+			</textField>
 		</band>
 	</detail>
 	<columnFooter>
-		<band height="7" splitType="Stretch"/>
+		<band height="12" splitType="Stretch"/>
 	</columnFooter>
 	<pageFooter>
 		<band height="25" splitType="Stretch">

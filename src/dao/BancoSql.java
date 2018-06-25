@@ -14,10 +14,11 @@ public class BancoSql {
 
     //Acesso direto usando driver JDBC class4 do SQL Server
     private static final String servidor = "com.microsoft.sqlserver.jdbc.SQLServerDriver";
-    private static final String urlBanco = "jdbc:sqlserver://172.168.255.252\\data:1433;";
+    private static final String urlBanco = "jdbc:sqlserver://desktop-fqa\\fqasqlserver:1433;";
+    //jdbc:sqlserver://desktop-fqa\\fqasqlserver:1433;databaseName=db_05579_1_C_1_2017
     private static final String nomeBanco = "databaseName=db_05579_1_C_1_2017;";
-    private static final String usuario = "user=05579_1_C_1_2017;";
-    private static final String senha = "password=P@ssw0rd";
+    private static final String usuario = "user=Otavio;";
+    private static final String senha = "password=Otavio@435";
 
     public static Connection getConnection() throws ClassNotFoundException, SQLException {
         Class.forName(servidor);

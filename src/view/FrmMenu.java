@@ -57,6 +57,7 @@ public class FrmMenu extends javax.swing.JFrame {
         itemSair = new javax.swing.JMenuItem();
         menuRelatório = new javax.swing.JMenu();
         itemRptCliente = new javax.swing.JMenuItem();
+        itemRptVenda = new javax.swing.JMenuItem();
         menuAjuda = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
@@ -122,6 +123,14 @@ public class FrmMenu extends javax.swing.JFrame {
         });
         menuRelatório.add(itemRptCliente);
 
+        itemRptVenda.setText("Relatório de Vendas");
+        itemRptVenda.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                itemRptVendaActionPerformed(evt);
+            }
+        });
+        menuRelatório.add(itemRptVenda);
+
         jMenuBar1.add(menuRelatório);
 
         menuAjuda.setText("Ajuda");
@@ -185,8 +194,20 @@ public class FrmMenu extends javax.swing.JFrame {
     }//GEN-LAST:event_formWindowOpened
 
     private void itemRptClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemRptClienteActionPerformed
-        // TODO add your handling code here:
+        try {
+            VisualizaRpt.GeraRelatorio("rptClientes.jasper", null, "Relatório de Clientes");
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(null, "Ocorreu um erro: " + ex);
+        }
     }//GEN-LAST:event_itemRptClienteActionPerformed
+
+    private void itemRptVendaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemRptVendaActionPerformed
+       try {
+            VisualizaRpt.GeraRelatorio("rptVendas.jasper", null, "Relatório de Vendas");
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(null, "Ocorreu um erro: " + ex);
+        }
+    }//GEN-LAST:event_itemRptVendaActionPerformed
 
     /**
      * @param args the command line arguments
@@ -227,6 +248,7 @@ public class FrmMenu extends javax.swing.JFrame {
     private javax.swing.JMenuItem itemCliente;
     private javax.swing.JMenuItem itemProduto;
     private javax.swing.JMenuItem itemRptCliente;
+    private javax.swing.JMenuItem itemRptVenda;
     private javax.swing.JMenuItem itemSair;
     private javax.swing.JMenuItem itemVenda;
     private javax.swing.JMenuBar jMenuBar1;
