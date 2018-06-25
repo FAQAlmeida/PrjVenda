@@ -40,7 +40,7 @@ public class DaoProduto extends Produto {
                 + "descricao = ?, "
                 + "quantidade = ?, "
                 + "precounit = ? "
-                + "where cod_pro = ?";
+                + "where codpro = ?";
         this.conexao = BancoSql.getConnection();
         comandoSql = conexao.prepareStatement(sql);
         comandoSql.setString(1, this.getDescricao());
@@ -54,7 +54,7 @@ public class DaoProduto extends Produto {
     @Override
     public boolean Excluir() throws SQLException, ClassNotFoundException{
         String sql = "Delete from pc_produto "
-                + "where cod_pro = ?";
+                + "where codpro = ?";
         try{
             this.conexao = BancoSql.getConnection();
         comandoSql = conexao.prepareStatement(sql);
@@ -78,7 +78,7 @@ public class DaoProduto extends Produto {
         ResultSet rs = comandoSql.executeQuery();
         while (rs.next()) {            
             produtoRetorno = new DaoProduto();
-            produtoRetorno.setCodProd(rs.getInt("cod_pro"));
+            produtoRetorno.setCodProd(rs.getInt("codpro"));
             produtoRetorno.setDescricao(rs.getString("descricao"));
             produtoRetorno.setQuantidade(rs.getInt("quantidade"));
             produtoRetorno.setPrecoUnit(rs.getDouble("precounit"));
@@ -99,7 +99,7 @@ public class DaoProduto extends Produto {
         ResultSet rs = comandoSql.executeQuery();
         while (rs.next()) {            
             produtoRetorno = new DaoProduto();
-            produtoRetorno.setCodProd(rs.getInt("cod_pro"));
+            produtoRetorno.setCodProd(rs.getInt("codpro"));
             produtoRetorno.setDescricao(rs.getString("descricao"));
             produtoRetorno.setQuantidade(rs.getInt("quantidade"));
             produtoRetorno.setPrecoUnit(rs.getDouble("precounit"));

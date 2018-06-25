@@ -15,7 +15,7 @@
 	</style>
 	<queryString language="SQL">
 		<![CDATA[SELECT
-     PC_Clientes."cod_cli" AS Cod_Cli,
+     PC_Clientes."codcli" AS Cod_Cli,
      PC_Clientes."nome" AS Nome,
      PC_Clientes."endereco" AS Endereco,
      PC_Clientes."cidade" AS Cidade,
@@ -51,10 +51,6 @@ FROM
 					</textElement>
 					<text><![CDATA[Relatório de Clientes]]></text>
 				</staticText>
-				<image scaleImage="RetainShape" hAlign="Center" vAlign="Middle">
-					<reportElement x="451" y="2" width="102" height="98" uuid="abb81470-fe58-48ed-8b94-a27d3ceacf90"/>
-					<imageExpression><![CDATA["C:\\Users\\otavi\\OneDrive\\Documentos\\Projetos\\JAVA\\PrjVenda\\src\\view\\reports\\1522329017011.png"]]></imageExpression>
-				</image>
 			</frame>
 			<frame>
 				<reportElement mode="Opaque" x="0" y="100" width="555" height="32" forecolor="#000000" backcolor="#CC0000" uuid="66b43138-d049-4181-b41b-5925abc0f49c"/>

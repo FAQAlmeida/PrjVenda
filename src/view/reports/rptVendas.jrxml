@@ -2,7 +2,7 @@
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="rptVendas" pageWidth="595" pageHeight="842" whenNoDataType="BlankPage" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="4a739422-b40a-482f-9b8c-8be9799f9ec6">
 	<property name="ireport.zoom" value="1.331000000000001"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="183"/>
+	<property name="ireport.y" value="77"/>
 	<style name="Title" forecolor="#FFFFFF" fontName="Times New Roman" fontSize="50" isBold="false" pdfFontName="Times-Bold"/>
 	<style name="SubTitle" forecolor="#CCCCCC" fontName="Times New Roman" fontSize="18" isBold="false" pdfFontName="Times-Roman"/>
 	<style name="Column header" forecolor="#666666" fontName="Times New Roman" fontSize="14" isBold="true" pdfFontName="Times-Roman"/>
@@ -16,22 +16,22 @@
 	<queryString language="SQL">
 		<![CDATA[SELECT
      pc_itemvenda.quantidade*pc_itemvenda.precounit AS SubTotal,
-     PC_ItemVenda."cod_pro" AS PC_ItemVenda_cod_pro,
+     PC_ItemVenda."codpro" AS PC_ItemVenda_cod_pro,
      PC_ItemVenda."numvenda" AS PC_ItemVenda_numvenda,
      PC_Produto."descricao" AS PC_Produto_descricao,
      PC_ItemVenda."quantidade" AS PC_ItemVenda_quantidade,
      PC_ItemVenda."precounit" AS PC_ItemVenda_precounit,
      PC_Venda."numvenda" AS PC_Venda_numvenda,
-     PC_Venda."cod_cli" AS PC_Venda_cod_cli,
+     PC_Venda."codcli" AS PC_Venda_cod_cli,
      PC_Venda."datavenda" AS PC_Venda_datavenda,
      PC_Venda."dataentrega" AS PC_Venda_dataentrega,
      PC_Venda."obs" AS PC_Venda_obs,
-     PC_Clientes."cod_cli" AS PC_Clientes_cod_cli,
+     PC_Clientes."codcli" AS PC_Clientes_cod_cli,
      PC_Clientes."nome" AS PC_Clientes_nome
 FROM
      "dbo"."PC_Venda" PC_Venda INNER JOIN "dbo"."PC_ItemVenda" PC_ItemVenda ON PC_Venda."numvenda" = PC_ItemVenda."numvenda"
-     INNER JOIN "dbo"."PC_Produto" PC_Produto ON PC_ItemVenda."cod_pro" = PC_Produto."cod_pro"
-     INNER JOIN "dbo"."PC_Clientes" PC_Clientes ON PC_Venda."cod_cli" = PC_Clientes."cod_cli"]]>
+     INNER JOIN "dbo"."PC_Produto" PC_Produto ON PC_ItemVenda."codpro" = PC_Produto."codpro"
+     INNER JOIN "dbo"."PC_Clientes" PC_Clientes ON PC_Venda."codcli" = PC_Clientes."codcli"]]>
 	</queryString>
 	<field name="SubTotal" class="java.lang.Double"/>
 	<field name="PC_ItemVenda_cod_pro" class="java.lang.Integer"/>
@@ -143,10 +143,6 @@ FROM
 					</textElement>
 					<text><![CDATA[Relatório de Vendas]]></text>
 				</staticText>
-				<image hAlign="Center" vAlign="Middle">
-					<reportElement x="433" y="0" width="122" height="100" uuid="898417b5-1aec-48af-afb1-b3ed9d1620b8"/>
-					<imageExpression><![CDATA["C:\\Users\\otavi\\OneDrive\\Documentos\\Projetos\\JAVA\\PrjVenda\\src\\view\\reports\\icone-webmotors-venda-por-mais.png"]]></imageExpression>
-				</image>
 			</frame>
 			<frame>
 				<reportElement mode="Opaque" x="0" y="100" width="555" height="32" forecolor="#000000" backcolor="#CC0000" uuid="a6fc0455-87c1-486b-a096-4e69362f2ee9"/>
@@ -236,7 +232,7 @@ FROM
 					<textElement textAlignment="Right" verticalAlignment="Middle">
 						<font size="10" isBold="false"/>
 					</textElement>
-					<textFieldExpression><![CDATA["Page "+$V{PAGE_NUMBER}+" of"]]></textFieldExpression>
+					<textFieldExpression><![CDATA["Página "+$V{PAGE_NUMBER}+" de"]]></textFieldExpression>
 				</textField>
 				<textField pattern="EEEEE dd MMMMM yyyy">
 					<reportElement style="Column header" x="2" y="1" width="197" height="20" forecolor="#FFFFFF" uuid="b166e701-9fe0-457c-841f-c60be5f1a089"/>

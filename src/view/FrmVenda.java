@@ -934,14 +934,14 @@ public class FrmVenda extends javax.swing.JFrame {
                         // Trocando os valores no mesmo item
                         item = FrmItemVenda.showItemVenda(item);
                         // Verificando se o produto já existe na Venda
-                        for (DaoItemVenda daoIt : it) {
-                            if (daoIt.getCodPro() == item.getCodPro()) {
-                                JOptionPane.showMessageDialog(null, "O Produto já"
-                                        + " está cadastrado nessa venda!", "Erro:",
-                                        JOptionPane.ERROR_MESSAGE);
-                                return;
-                            }
-                        }
+//                        for (DaoItemVenda daoIt : it) {
+//                            if (daoIt.getCodPro() == item.getCodPro()) {
+//                                JOptionPane.showMessageDialog(null, "O Produto já"
+//                                        + " está cadastrado nessa venda!", "Erro:",
+//                                        JOptionPane.ERROR_MESSAGE);
+//                                return;
+//                            }
+//                        }
                         // Trocando os valores no mesmo item
                         it.set(tblItens.getSelectedRow(), item);
                         atualizaTableItens(it);

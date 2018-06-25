@@ -22,7 +22,7 @@ public class DaoItemVenda extends ItemVenda {
     @Override
     public void Incluir() throws SQLException, ClassNotFoundException {
         String sql = "INSERT INTO pc_itemvenda "
-                + "(numVenda, cod_pro, quantidade, precounit) "
+                + "(numVenda, codpro, quantidade, precounit) "
                 + " VALUES "
                 + "(?, ?, ?, ?) ";
         this.conexao = BancoSql.getConnection();
@@ -39,7 +39,7 @@ public class DaoItemVenda extends ItemVenda {
     @Override
     public void Alterar() throws SQLException, ClassNotFoundException {
         String sql = "update pc_itemvenda SET "
-                + "cod_pro = ?, "
+                + "codpro = ?, "
                 + "quantidade = ?, "
                 + "prcounit = ?, "
                 + "WHERE numVenda = ? ";
@@ -71,16 +71,16 @@ public class DaoItemVenda extends ItemVenda {
         DaoItemVenda itemRetorno;
         String sql;
         if (item.getCodPro() > 0) {
-            sql = "Select numVenda, pc_itemvenda.cod_pro, pc_produto.descricao, "
+            sql = "Select numVenda, pc_itemvenda.codpro, pc_produto.descricao, "
                     + "pc_itemvenda.quantidade, pc_itemvenda.precounit, "
                     + "(pc_itemvenda.quantidade * pc_itemvenda.precounit) as subtotal "
-                    + "from pc_itemvenda inner join pc_produto on pc_produto.cod_pro = pc_itemvenda.cod_pro "
-                    + "where pc_itemvenda.numvenda = ? and pc_itemvenda.cod_pro = ?";
+                    + "from pc_itemvenda inner join pc_produto on pc_produto.codpro = pc_itemvenda.codpro "
+                    + "where pc_itemvenda.numvenda = ? and pc_itemvenda.codpro = ?";
         } else {
-            sql = "Select numVenda, pc_itemvenda.cod_pro, pc_produto.descricao, "
+            sql = "Select numVenda, pc_itemvenda.codpro, pc_produto.descricao, "
                     + "pc_itemvenda.quantidade, pc_itemvenda.precounit, "
                     + "(pc_itemvenda.quantidade * pc_itemvenda.precounit) as subtotal "
-                    + "from pc_itemvenda inner join pc_produto on pc_produto.cod_pro = pc_itemvenda.cod_pro "
+                    + "from pc_itemvenda inner join pc_produto on pc_produto.codpro = pc_itemvenda.codpro "
                     + "where pc_itemvenda.numvenda = ?";
         }
         ArrayList<DaoItemVenda> listaItens = new ArrayList<DaoItemVenda>();
@@ -97,7 +97,7 @@ public class DaoItemVenda extends ItemVenda {
         while (rs.next()) {
             itemRetorno = new DaoItemVenda();
             itemRetorno.setNumVenda(rs.getInt("numvenda"));
-            itemRetorno.setCodPro(rs.getInt("cod_pro"));
+            itemRetorno.setCodPro(rs.getInt("codpro"));
             itemRetorno.setDescricao(rs.getString("descricao"));
             itemRetorno.setQuantidade(rs.getInt("quantidade"));
             itemRetorno.setPrecoUnit(rs.getDouble("precounit"));

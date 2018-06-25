@@ -59,7 +59,7 @@ public class DaoCliente extends Cliente {
                 + "CEP=?, "
                 + "telefone=?, "
                 + "DataNasc=? "
-                + "where Cod_Cli = ?";
+                + "where CodCli = ?";
         this.conexao = BancoSql.getConnection();
         comandoSql = conexao.prepareStatement(sql);
         comandoSql.setString(1, this.getNome());
@@ -85,7 +85,7 @@ public class DaoCliente extends Cliente {
         //Note que o bloco --try--catch é desnecessário, pois as excessôes já são lançadas na cláusula 'throws' na assinatura do método
         try {
             String sql = "Delete from pc_clientes "
-                    + "where cod_CLi = ?";
+                    + "where codCLi = ?";
             this.conexao = BancoSql.getConnection();
             comandoSql = conexao.prepareStatement(sql);
             comandoSql.setInt(1, this.getCodCli());
@@ -115,7 +115,7 @@ public class DaoCliente extends Cliente {
         
         while (rs.next()) {            
             clienteRetorno = new DaoCliente();
-            clienteRetorno.setCodCli(rs.getInt("COD_CLI"));
+            clienteRetorno.setCodCli(rs.getInt("CODCLI"));
             clienteRetorno.setNome(rs.getString("NOME"));
             clienteRetorno.setEndereco(rs.getString("ENDERECO"));
             clienteRetorno.setCidade(rs.getString("CIDADE"));
@@ -145,7 +145,7 @@ public class DaoCliente extends Cliente {
         
         while (rs.next()) {            
             clienteRetorno = new DaoCliente();
-            clienteRetorno.setCodCli(rs.getInt("COD_CLI"));
+            clienteRetorno.setCodCli(rs.getInt("CODCLI"));
             clienteRetorno.setNome(rs.getString("NOME"));
             clienteRetorno.setEndereco(rs.getString("ENDERECO"));
             clienteRetorno.setCidade(rs.getString("CIDADE"));

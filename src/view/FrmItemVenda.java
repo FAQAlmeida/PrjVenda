@@ -125,7 +125,11 @@ public class FrmItemVenda extends javax.swing.JDialog {
 
         jLabel4.setText("Preço");
 
-        txtPreco.setEnabled(false);
+        txtPreco.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                txtPrecoFocusLost(evt);
+            }
+        });
         txtPreco.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtPrecoActionPerformed(evt);
@@ -322,6 +326,17 @@ public class FrmItemVenda extends javax.swing.JDialog {
             JOptionPane.showMessageDialog(null, "Ocorreu um erro ao calcular o subtotal" + ex.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_txtQuantidadeFocusLost
+
+    private void txtPrecoFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtPrecoFocusLost
+        try {
+            JOptionPane.showMessageDialog(null, nfPreco.valueToString(Integer.valueOf(txtQuantidade.getText()) * pro.get(cmbProduto.getSelectedIndex()).getPrecoUnit()));
+            txtSubtotal.setText(nfPreco.valueToString(Integer.valueOf(txtQuantidade.getText()) * pro.get(cmbProduto.getSelectedIndex()).getPrecoUnit()));
+        } catch (ParseException | ArithmeticException ex) {
+            txtQuantidade.setValue((Integer) 1);
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(null, "Ocorreu um erro ao calcular o subtotal" + ex.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_txtPrecoFocusLost
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

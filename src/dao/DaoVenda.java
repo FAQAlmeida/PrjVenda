@@ -22,7 +22,7 @@ public class DaoVenda extends Venda {
     @Override
     public void Incluir() throws SQLException, ClassNotFoundException {
         String sql = "set dateformat dmy Insert into pc_venda "
-                + "(cod_cli, datavenda, dataEntrega, obs) "
+                + "(codcli, datavenda, dataEntrega, obs) "
                 + "values "
                 + "(?,?,?,?) ";
         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
@@ -42,7 +42,7 @@ public class DaoVenda extends Venda {
     @Override
     public void Alterar() throws SQLException, ClassNotFoundException {
         String sql = "set dateformat dmy update pc_venda set "
-                + "cod_cli = ?, "
+                + "codcli = ?, "
                 + "datavenda = ?, "
                 + "dataEntrega = ?, "
                 + "obs = ? "
@@ -77,12 +77,12 @@ public class DaoVenda extends Venda {
         String sql;
         
         if(venda.getNumVenda() > 0){
-            sql = "set dateformat dmy select numVenda, pc_venda.cod_cli, nome, datavenda, dataentrega, obs "
-                    + "from pc_venda inner join pc_clientes on pc_venda.cod_cli = pc_clientes.cod_cli "
+            sql = "set dateformat dmy select numVenda, pc_venda.codcli, nome, datavenda, dataentrega, obs "
+                    + "from pc_venda inner join pc_clientes on pc_venda.codcli = pc_clientes.codcli "
                     + "where numvenda = ?";
         }else{
-            sql = "set dateformat dmy select numVenda, pc_venda.cod_cli, nome, datavenda, dataentrega, obs "
-                    + "from pc_venda inner join pc_clientes on pc_venda.cod_cli = pc_clientes.cod_cli ";
+            sql = "set dateformat dmy select numVenda, pc_venda.codcli, nome, datavenda, dataentrega, obs "
+                    + "from pc_venda inner join pc_clientes on pc_venda.codcli = pc_clientes.codcli ";
         }
 
         ArrayList<DaoVenda> listavendas = new ArrayList<DaoVenda>();
@@ -97,7 +97,7 @@ public class DaoVenda extends Venda {
         while (rs.next()) {            
             vendaRetorno = new DaoVenda();
             vendaRetorno.setNumVenda(rs.getInt("NUMVenda"));
-            vendaRetorno.setCodCli(rs.getInt("cod_cli"));
+            vendaRetorno.setCodCli(rs.getInt("codcli"));
             vendaRetorno.setNome(rs.getString("NOME"));
             vendaRetorno.setDataVenda(rs.getDate("datavenda"));
             vendaRetorno.setDataEntrega(rs.getDate("dataentrega"));
